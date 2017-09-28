@@ -165,3 +165,4 @@ target/
 *.directory
 bower_components
 
+src/test/

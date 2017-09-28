@@ -22,4 +22,43 @@ public class User {
 		this.id = id;
 	}
 
+	public final String getUsername() {
+
+		return username;
+	}
+
+	public final String getPassword() {
+
+		return password;
+	}
+
+	public final String getRole() {
+
+		return role;
+	}
+
+	public final String getId() {
+
+		return id;
+	}
+
+	public void setUsername(String username) {
+
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+
+		this.password = password;
+	}
+
+	public void setRole(String role) {
+
+		this.role = role;
+	}
+
+	public void setId(String id) {
+
+		this.id = id;
+	}
 }
