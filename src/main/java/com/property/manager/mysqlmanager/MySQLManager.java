@@ -17,13 +17,13 @@ public class MySQLManager {
 
 	public static MySQLManager instance = null;
 
-	private static final String URL = "jdbc:mysql://is2:81/MDN150/";
+	private static final String URL = "jdbc:mysql://localhost:3306/property_management";
 
-	private static final String USER = "MDN150";
+	private static final String USER = "aubgstudent";
 
-	private static final String PASSWRD = "rP8Pm9";
+	private static final String PASSWRD = "aubgstudent";
 
-	public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
+	public static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 
 	private PreparedStatement preparedStatement = null;
 
@@ -58,10 +58,16 @@ public class MySQLManager {
 		return instance;
 	}
 
-	private void createConnection() {
+	public void createConnection() {
 
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWRD);
+
+			if (connection != null) {
+				System.out.println("You made it, take control your database now!");
+			} else {
+				System.out.println("Failed to make connection!");
+			}
 
 		} catch (SQLException sqle) {
 
@@ -69,7 +75,7 @@ public class MySQLManager {
 		}
 	}
 
-	private Connection getConnection() {
+	public Connection getConnection() {
 
 		return connection;
 	}
