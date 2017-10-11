@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +49,9 @@ public class MySQLManager {
 		if (instance == null) {
 
 			instance = new MySQLManager();
+
+			// Automatically connect to the DB.
+			instance.getConnection();
 		}
 	}
 
@@ -58,15 +60,18 @@ public class MySQLManager {
 		return instance;
 	}
 
-	public void createConnection() {
+	private void createConnection() {
 
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWRD);
 
 			if (connection != null) {
-				System.out.println("You made it, take control your database now!");
+
+				LOGGER.info("You made it, take control your database now!");
+
 			} else {
-				System.out.println("Failed to make connection!");
+
+				LOGGER.info("Failed to make connection!");
 			}
 
 		} catch (SQLException sqle) {
@@ -80,11 +85,11 @@ public class MySQLManager {
 		return connection;
 	}
 
-	public void readDB() {
+	private void readDB() {
 
 		try {
 
-			statement = instance.connection.createStatement();
+			statement = connection.createStatement();
 
 			resultSet = statement.executeQuery("");
 
@@ -96,6 +101,33 @@ public class MySQLManager {
 
 			close();
 		}
+	}
+
+	public String getUserRole() {
+
+		return "ROLE";
+	}
+
+	public String getUserID() {
+
+		return "ID";
+	}
+
+	public String findUser(String username) {
+
+		try {
+
+			statement = connection.createStatement();
+
+			// Send a query to find the user that is paased as an argument.
+			resultSet = statement.executeQuery("SELECT " + username + " FROM USERS");
+
+		} catch (SQLException sqle) {
+
+			LOGGER.error("Could not find user.", sqle);
+		}
+
+		return resultSet.toString();
 	}
 
 	// Close the resultSet, statement, and connection.
