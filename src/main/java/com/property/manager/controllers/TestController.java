@@ -14,8 +14,7 @@ public class TestController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
-	@RequestMapping("/")
-	@ResponseBody
+	@RequestMapping("/asdf")
 	public String index() {
 
 		LOGGER.info("First test is a go!");
