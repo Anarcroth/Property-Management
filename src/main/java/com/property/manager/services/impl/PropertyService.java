@@ -29,7 +29,14 @@ public class PropertyService implements IPropertyService {
 
     @Override
     public boolean addProperty(Property property) {
-        return false;
+        try{
+        propertyDAO.addProperty(property);
+            return true;
+        }
+        catch(Exception e) {
+            return false;
+        }
+
     }
 
     @Override

@@ -60,7 +60,7 @@ public class MySQLManager {
 		return instance;
 	}
 
-	private void createConnection() {
+	public void createConnection() {
 
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWRD);
