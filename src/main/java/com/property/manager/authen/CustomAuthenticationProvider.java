@@ -5,7 +5,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.property.manager.User;
+import com.property.manager.models.User;
 import com.property.manager.mysqlmanager.MySQLManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
 
-	private static MySQLManager sqlManager;
 	/**
 	 * Authenticate the user that logs in using the credentials from the html page and reading from the DB.
 	 *
@@ -38,6 +37,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String loginName = authentication.getName();
 
 		String password = authentication.getCredentials().toString();
+
+		MySQLManager.init();
 
 		// Get loginName from the DB
 		String username = MySQLManager.get().findUser(loginName);

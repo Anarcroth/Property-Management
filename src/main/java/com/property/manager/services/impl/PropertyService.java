@@ -14,8 +14,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class PropertyService implements IPropertyService {
 
+	private final IPropertyDAO propertyDAO;
+
 	@Autowired
-	private IPropertyDAO propertyDAO;
+	public PropertyService(IPropertyDAO propertyDAO) {
+
+		this.propertyDAO = propertyDAO;
+	}
 
 	@Override
 	public List<Property> getAllProperties() {

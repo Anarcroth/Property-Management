@@ -1,4 +1,4 @@
-package com.property.manager;
+package com.property.manager.models;
 
 public class User {
 

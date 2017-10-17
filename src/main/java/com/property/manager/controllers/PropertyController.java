@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.property.manager.models.Property;
 import com.property.manager.services.IPropertyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +23,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 public class PropertyController {
 
+	public static final Logger LOGGER = LoggerFactory.getLogger(PropertyController.class);
+
+	private final IPropertyService propertyService;
+
 	@Autowired
-	private IPropertyService propertyService;
+	public PropertyController(IPropertyService propertyService) {
+
+		this.propertyService = propertyService;
+	}
 
 	@RequestMapping(value = "/", method = GET)
 	public ResponseEntity<List<Property>> getAllProperties() {
 
-		System.out.println("properties get controller");
+		LOGGER.info("properties get controller");
 		List<Property> list = propertyService.getAllProperties();
 
 		return new ResponseEntity<>(list, HttpStatus.OK);
@@ -38,12 +47,12 @@ public class PropertyController {
 	@RequestMapping(value = "/", method = POST)
 	public ResponseEntity<String> addProperty(@ModelAttribute Property property) {
 
-		System.out.print(property);
+		LOGGER.info("properties get controller");
 		boolean flag = propertyService.addProperty(property);
 		if (flag) {
-			return new ResponseEntity("Created", HttpStatus.CREATED);
+			return new ResponseEntity<>("Created", HttpStatus.CREATED);
 		} else {
-			return new ResponseEntity("Failed", HttpStatus.I_AM_A_TEAPOT);
+			return new ResponseEntity<>("Failed", HttpStatus.I_AM_A_TEAPOT);
 		}
 
 	}

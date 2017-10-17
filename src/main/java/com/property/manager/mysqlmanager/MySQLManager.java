@@ -14,7 +14,7 @@ public class MySQLManager {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MySQLManager.class);
 
-	public static MySQLManager instance = null;
+	private static MySQLManager instance = null;
 
 	private static final String URL = "jdbc:mysql://localhost:3306/property_management";
 

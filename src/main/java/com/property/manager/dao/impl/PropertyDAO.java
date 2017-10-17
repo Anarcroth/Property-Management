@@ -19,8 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class PropertyDAO implements IPropertyDAO {
 
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	public PropertyDAO(JdbcTemplate jdbcTemplate) {
+
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	@Override
 	public List<Property> getAllProperties() {
