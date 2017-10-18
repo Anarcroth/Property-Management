@@ -51,5 +51,4 @@ public class PropertyDAO implements IPropertyDAO {
 				property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(),
 				property.getRentPerMonth(), property.getPictureUrl());
 	}
-
 }

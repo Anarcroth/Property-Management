@@ -5,6 +5,8 @@ import java.util.List;
 import com.property.manager.dao.IPropertyDAO;
 import com.property.manager.models.Property;
 import com.property.manager.services.IPropertyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PropertyService implements IPropertyService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
 	private final IPropertyDAO propertyDAO;
 
@@ -39,11 +43,15 @@ public class PropertyService implements IPropertyService {
 
 		try {
 			propertyDAO.addProperty(property);
+
 			return true;
+
 		} catch (Exception e) {
-			return false;
+
+			LOGGER.error("Could not add property.", e);
 		}
 
+		return false;
 	}
 
 	@Override

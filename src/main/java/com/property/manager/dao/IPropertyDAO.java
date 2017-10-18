@@ -14,5 +14,4 @@ public interface IPropertyDAO {
 	Property getPropertyById(int propertyId);
 
 	void addProperty(Property property);
-
 }
