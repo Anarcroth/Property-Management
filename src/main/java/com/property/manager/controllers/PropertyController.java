@@ -54,7 +54,5 @@ public class PropertyController {
 		} else {
 			return new ResponseEntity<>("Failed", HttpStatus.I_AM_A_TEAPOT);
 		}
-
 	}
-
 }

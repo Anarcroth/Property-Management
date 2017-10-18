@@ -1,9 +1,51 @@
 package com.property.manager.controllers;
 
+import java.util.List;
+
+import com.property.manager.models.User;
+import com.property.manager.services.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class UserController {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
+	private final IUserService userService;
+
+	@Autowired
+	public UserController(IUserService userService) {
+
+		this.userService = userService;
+	}
+
+	@RequestMapping("/users")
+	public ResponseEntity<List<User>> getAllUsers() {
+
+		LOGGER.info("getting all users");
+
+		List<User> users = userService.getAllUsers();
+
+		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+	}
+
+	@RequestMapping("/users")
+	public ResponseEntity<String> addUser(@ModelAttribute User user) {
+
+		LOGGER.info("adding user");
+
+		if (userService.addUser(user)) {
+			return new ResponseEntity<String>("added", HttpStatus.CREATED);
+
+		} else {
+			return new ResponseEntity<String>("failed", HttpStatus.I_AM_A_TEAPOT);
+		}
+	}
 }

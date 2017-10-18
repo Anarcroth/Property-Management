@@ -7,8 +7,10 @@ import java.util.List;
 
 import com.property.manager.models.User;
 import com.property.manager.mysqlmanager.MySQLManager;
+import com.property.manager.services.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,14 @@ import org.springframework.stereotype.Service;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
+
+	private final IUserService userService;
+
+	@Autowired
+	public CustomAuthenticationProvider(IUserService userService) {
+
+		this.userService = userService;
+	}
 
 	/**
 	 * Authenticate the user that logs in using the credentials from the html page and reading from the DB.
@@ -38,32 +48,33 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		String password = authentication.getCredentials().toString();
 
-		MySQLManager.init();
+		User currUser = new User();
 
-		// Get loginName from the DB
-		String username = MySQLManager.get().findUser(loginName);
-		String userRole = MySQLManager.get().getUserRole();
-		String userId = MySQLManager.get().getUserID();
+		List<User> users = userService.getAllUsers();
 
-		User user = new User(username, userRole, userId);
+		for (User user : users) {
+			if (user.getUsername().equals(loginName)) {
+				currUser = user;
+			}
+		}
 
-		if (user.getId() != null) {
+		if (currUser.getId() != 0) {
 
 			try {
 				String generatedSecuredPasswordHash = PasswordHash.get().generateStorngPasswordHash(password);
 
-				boolean matched = PasswordHash.get().validatePassword(password, user.getPassword());
+				boolean matched = PasswordHash.get().validatePassword(password, currUser.getPassword());
 
-				if (user != null) {
+				if (currUser != null) {
 
-					if (loginName.equals(user.getUsername()) && matched) {
+					if (loginName.equals(currUser.getUsername()) && matched) {
 
 						// It is very important ot pass the List of Granted Authority to the
 						// UsernamePasswordAuthenticationTokens so it can properly send the
 						// WebSecurity authenticator the credentials and let the user in the app.
 						List<GrantedAuthority> grantedAuths = new ArrayList<>();
 
-						grantedAuths.add(new SimpleGrantedAuthority(userRole));
+						grantedAuths.add(new SimpleGrantedAuthority(currUser.getRole()));
 
 						LOGGER.info("Successful authentication of " + loginName);
 
@@ -71,7 +82,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 						// the user is updated in couchDB, the objects revision number increments, so in order to update
 						// the user object consistently, the endpoints have to read the directly from the DB and not from
 						// this authenticator.
-						return new UsernamePasswordAuthenticationToken(user.getUsername(), password, grantedAuths);
+						return new UsernamePasswordAuthenticationToken(currUser.getUsername(), password, grantedAuths);
 					}
 				}
 

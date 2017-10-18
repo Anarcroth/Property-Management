@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PropertyService implements IPropertyService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PropertyService.class);
 
 	private final IPropertyDAO propertyDAO;
 
