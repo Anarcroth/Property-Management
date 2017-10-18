@@ -1,8 +1,8 @@
-#Property Management
+# Property Management
 
-####A property management application. Allows for users to search a database and scroll through mutliple hpusing options. The users can rent or buy a property, can bid in the different places and filter out their search.
+A property management application. Allows for users to search a database and scroll through mutliple hpusing options. The users can rent or buy a property, can bid in the different places and filter out their search.
 
-####How to install and run the program:
+### How to install and run the program:
 
 1. clone the repository using :
  git clone https://github.com/Anarcroth/Property-Management.git
