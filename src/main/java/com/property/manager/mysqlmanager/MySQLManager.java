@@ -50,8 +50,7 @@ public class MySQLManager {
 
 			instance = new MySQLManager();
 
-			// Automatically connect to the DB.
-			instance.getConnection();
+			instance.createConnection();
 		}
 	}
 
@@ -83,51 +82,6 @@ public class MySQLManager {
 	public Connection getConnection() {
 
 		return connection;
-	}
-
-	private void readDB() {
-
-		try {
-
-			statement = connection.createStatement();
-
-			resultSet = statement.executeQuery("");
-
-		} catch (Exception e) {
-
-			LOGGER.error("Could not read from the DB.", e);
-
-		} finally {
-
-			close();
-		}
-	}
-
-	public String getUserRole() {
-
-		return "ROLE";
-	}
-
-	public String getUserID() {
-
-		return "ID";
-	}
-
-	public String findUser(String username) {
-
-		try {
-
-			statement = connection.createStatement();
-
-			// Send a query to find the user that is paased as an argument.
-			resultSet = statement.executeQuery("SELECT " + username + " FROM USERS");
-
-		} catch (SQLException sqle) {
-
-			LOGGER.error("Could not find user.", sqle);
-		}
-
-		return resultSet.toString();
 	}
 
 	// Close the resultSet, statement, and connection.

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.property.manager.models.User;
-import com.property.manager.mysqlmanager.MySQLManager;
 import com.property.manager.services.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
 
-	private final IUserService userService;
+	private IUserService userService = null;
+
+	public CustomAuthenticationProvider() {
+
+	}
 
 	@Autowired
 	public CustomAuthenticationProvider(IUserService userService) {
@@ -37,8 +40,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	 *
 	 * @param authentication
 	 * 		Spring Security authentication class
-	 * @return
-	 * 		A valid authentication if the user is found with the correct credentials.
+	 * @return A valid authentication if the user is found with the correct credentials.
 	 * @throws AuthenticationException
 	 */
 	@Override

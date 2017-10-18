@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RestController
 public class UserController {
 
@@ -26,7 +29,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping("/users")
+	@RequestMapping(value = "/users", method = GET)
 	public ResponseEntity<List<User>> getAllUsers() {
 
 		LOGGER.info("getting all users");
@@ -36,7 +39,7 @@ public class UserController {
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 
-	@RequestMapping("/users")
+	@RequestMapping(value = "/users", method = POST)
 	public ResponseEntity<String> addUser(@ModelAttribute User user) {
 
 		LOGGER.info("adding user");

@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// CSRF has to be disabled in order not to throw an error during runtime.
 		http	.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/", "/js/**", "/css/**", "/img/**", "/log/sign_up").permitAll()
+				.antMatchers("/", "/js/**", "/css/**", "/img/**", "/users").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
