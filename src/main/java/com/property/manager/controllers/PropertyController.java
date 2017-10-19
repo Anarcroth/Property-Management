@@ -48,11 +48,7 @@ public class PropertyController {
 	public ResponseEntity<String> addProperty(@ModelAttribute Property property) {
 
 		LOGGER.info("properties get controller");
-		boolean flag = propertyService.addProperty(property);
-		if (flag) {
-			return new ResponseEntity<>("Created", HttpStatus.CREATED);
-		} else {
-			return new ResponseEntity<>("Failed", HttpStatus.I_AM_A_TEAPOT);
-		}
+		return propertyService.addProperty(property);
+
 	}
 }

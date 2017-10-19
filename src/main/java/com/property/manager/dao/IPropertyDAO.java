@@ -14,4 +14,8 @@ public interface IPropertyDAO {
 	Property getPropertyById(int propertyId);
 
 	void addProperty(Property property);
+
+	boolean propertyExists(String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms, int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl);
+
+
 }

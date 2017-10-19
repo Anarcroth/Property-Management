@@ -3,6 +3,7 @@ package com.property.manager.services;
 import java.util.List;
 
 import com.property.manager.models.Property;
+import org.springframework.http.ResponseEntity;
 
 /**
  * Created by EKAC on 12.10.2017 г..
@@ -13,7 +14,7 @@ public interface IPropertyService {
 
 	Property getPropertyById(int propertyId);
 
-	boolean addProperty(Property property);
+	ResponseEntity addProperty(Property property);
 
 	void updateProperty(Property property);
 

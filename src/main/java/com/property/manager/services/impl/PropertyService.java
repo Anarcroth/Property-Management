@@ -8,6 +8,8 @@ import com.property.manager.services.IPropertyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -39,19 +41,23 @@ public class PropertyService implements IPropertyService {
 	}
 
 	@Override
-	public boolean addProperty(Property property) {
+	public ResponseEntity<String> addProperty(Property property) {
 
 		try {
-			propertyDAO.addProperty(property);
+			if (propertyDAO.propertyExists(property.getType(), property.getAddress(), property.getDescription(), property.isForSale(), property.isForRent(), property.getNumberOfRooms(), property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(), property.getRentPerMonth(), property.getPictureUrl())) {
 
-			return true;
-
-		} catch (Exception e) {
+				return new ResponseEntity<>("The property already exists",HttpStatus.CONFLICT);
+			}
+			else{
+				propertyDAO.addProperty(property);
+				return new ResponseEntity<>("The property is created",HttpStatus.CREATED);
+			}
+		}
+		catch(Exception e){
 
 			LOGGER.error("Could not add property.", e);
+			return new ResponseEntity<>("Something went wrong. Please, check your request",HttpStatus.BAD_REQUEST);
 		}
-
-		return false;
 	}
 
 	@Override

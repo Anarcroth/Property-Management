@@ -51,4 +51,15 @@ public class PropertyDAO implements IPropertyDAO {
 				property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(),
 				property.getRentPerMonth(), property.getPictureUrl());
 	}
+
+	@Override
+	public boolean propertyExists(String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms, int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl) {
+		String sql = "SELECT count(*) FROM property WHERE type = ? and address=? and description=? and for_sale=? and for_rent=? and no_rooms=? and no_bedrooms=? and no_bathrooms=? and price=? and rent_per_month=? and photo=?";
+		int count = jdbcTemplate.queryForObject(sql, Integer.class, type, address, description, forSale, forRent, numberOfRooms, numberOfBedrooms, numberOfBathrooms, price, rentPerMonth, pictureUrl);
+		if (count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }
