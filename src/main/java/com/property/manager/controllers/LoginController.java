@@ -32,6 +32,8 @@ public class LoginController {
 	@Autowired
 	public LoginController(IUserService userService) {
 
+		PasswordHash.init();
+
 		this.userService = userService;
 	}
 
@@ -51,9 +53,7 @@ public class LoginController {
 
 		User newUser = null;
 
-		User users = userService.getUserByUsername(username);
-
-		if (username.equals(users.getUsername())) {
+		if (userService.getUserByUsername(username) != null) {
 
 			LOGGER.error("Username already exists.");
 

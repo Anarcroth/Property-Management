@@ -42,13 +42,13 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public User getUserByUsername(String username) {
 
-		String getUserIdQuery = "SELECT username FROM user";
+		String getUserNameQuery = "SELECT * FROM user WHERE username = ?";
 
 		RowMapper<User> rowMapper = new UserRowMapper();
 
-		User user = this.jdbcTemplate.queryForObject(getUserIdQuery, rowMapper);
+		User user = this.jdbcTemplate.queryForObject(getUserNameQuery, rowMapper, username);
 
-		LOGGER.info("Retrieved user by username.");
+		LOGGER.info("Retrieved user by username");
 
 		return user;
 	}

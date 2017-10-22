@@ -107,7 +107,7 @@ const xhrLoginRequest = function(method, endpoint, data) {
         xhr.overrideMimeType('application/json');
         xhr.open(method, endpoint, true);
         xhr.onload = () => {
-            if (xhr.responseURL && xhr.responseURL.indexOf('error') != -1) {
+            if (xhr.responseURL && xhr.responseURL.indexOf('error') !== -1) {
                 resolve(false);
             } else {
                 resolve(true);
