@@ -1,0 +1,137 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <title>Login/Sign Up</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Log In / Sign Up">
+    <meta name="author" content="Tatiana Triukhova, Edor Kacerja, and Martin Nestorov">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#334c58">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"
+          media="screen">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="row" id="parent">
+        <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 offset-md-1 col-md-10 col-sm-12 col-12  card d-block border-0 py-2">
+            <h1 class="pb-2 pt-3 title">Property Management</h1>
+            <h4 class="pb-2 pt-3 title">Log In / Sign Up</h4>
+            <div class="navigation">
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <a href="" class="nav-link" id="login-btn" data-toggle="collapse" data-target="#cardLogin"
+                           data-parent="#parent">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link collapsed" id="register-btn" data-toggle="collapse"
+                           data-target="#cardRegister" data-parent="#parent">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse show" id="cardLogin">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="form-group row mt-4">
+                            <div class="offset-md-2 offset-3 col-md-8 col-9 alert alert-success" id="success-alert"
+                                 role="alert">
+                                You successfully registered! Please, sign-in.
+                            </div>
+                            <label for="inputUserForm" class="col-md-2 col-3 px-0">Username</label>
+                            <div class="col-md-8 col-9">
+                                <input type="text" name="username" class="form-control" id="inputUserForm"
+                                       onkeydown="login(event)" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPasswordForm" class="col-md-2 col-3 px-0">Password</label>
+                            <div class="col-md-8 col-9">
+                                <input type="password" name="password" class="form-control" id="inputPasswordForm"
+                                       onkeydown="login(event)" required>
+                                <div class="form-control-feedback">Wrong credentials. Try again?</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-md-2 offset-3 col-md-8 col-9 pb-3 pt-2">
+                                <button class="btn btn-secondary-outline btn-lg btn-block" onclick="login()">Sign-in
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="cardRegister">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="form-group row mt-4">
+                            <label for="input2UserForm" class="col-md-2 col-3 px-0">Username</label>
+                            <div class="col-md-8 col-9">
+                                <input type="text" class="form-control" id="input2UserForm" onkeydown="register(event)"
+                                       required>
+                                <div class="form-control-feedback">That username already exists. Try another one?</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input2User2Form" class="col-md-2 col-3 px-0">Full Name</label>
+                            <div class="col-md-8 col-9">
+                                <input type="text" class="form-control" id="input2User2Form" onkeydown="register(event)"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input2User3Form" class="col-md-2 col-3 px-0">Address</label>
+                            <div class="col-md-8 col-9">
+                                <input type="text" class="form-control" id="input2User3Form" onkeydown="register(event)"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input2PasswordForm" class="col-md-2 col-3 px-0">Password</label>
+                            <div class="col-md-8 col-9">
+                                <input type="password" class="form-control" id="input2PasswordForm"
+                                       onkeydown="register(event)" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input2Password2Form" class="col-md-2 col-3 px-0">Verify</label>
+                            <div class="col-md-8 col-9">
+                                <input type="password" class="form-control" id="input2Password2Form"
+                                       onkeydown="register(event)" required>
+                                <div class="form-control-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-md-2 offset-3 col-md-8 col-9 pb-3 pt-2">
+                                <button class="btn btn-secondary-outline btn-lg btn-block" onclick="register()">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+<script src="./js/global.js"></script>
+<script src="./js/login.js"></script>
+
+</body>
+
+</html>

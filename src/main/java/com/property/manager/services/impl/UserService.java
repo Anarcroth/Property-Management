@@ -16,7 +16,7 @@ public class UserService implements IUserService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
-	private final IUserDAO userDAO;
+	private static IUserDAO userDAO = null;
 
 	@Autowired
 	public UserService(IUserDAO userDAO) {
@@ -31,9 +31,9 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public User getUserById(int userId) {
+	public User getUserByUsername(String username) {
 
-		return null;
+		return userDAO.getUserByUsername(username);
 	}
 
 	@Override

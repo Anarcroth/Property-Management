@@ -33,7 +33,7 @@ public class PropertyController {
 		this.propertyService = propertyService;
 	}
 
-	@RequestMapping(value = "/", method = GET)
+	@RequestMapping(value = "/prop", method = GET)
 	public ResponseEntity<List<Property>> getAllProperties() {
 
 		LOGGER.info("properties get controller");
@@ -44,11 +44,11 @@ public class PropertyController {
 
 	//Accepts form-data through post requests
 	//TO DO: check for for null values and duplicate entries(cancel automatically incremented id-s)
-	@RequestMapping(value = "/", method = POST)
-	public ResponseEntity<String> addProperty(@ModelAttribute Property property) {
+	@RequestMapping(value = "/prop/add_prop", method = POST)
+	public ResponseEntity addProperty(@ModelAttribute Property property) {
 
 		LOGGER.info("properties get controller");
-		return propertyService.addProperty(property);
 
+		return propertyService.addProperty(property);
 	}
 }
