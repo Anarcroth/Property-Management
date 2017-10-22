@@ -31,7 +31,6 @@ public class PropertyDAO implements IPropertyDAO {
 	public List<Property> getAllProperties() {
 
 		String sql = "SELECT * FROM property";
-		//RowMapper<Article> rowMapper = new BeanPropertyRowMapper<Article>(Article.class);
 		RowMapper<Property> rowMapper = new PropertyRowMapper();
 		return this.jdbcTemplate.query(sql, rowMapper);
 	}

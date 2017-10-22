@@ -21,7 +21,7 @@ public class UserController {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-	private final IUserService userService;
+	private static IUserService userService = null;
 
 	@Autowired
 	public UserController(IUserService userService) {

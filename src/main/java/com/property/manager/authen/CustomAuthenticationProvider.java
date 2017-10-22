@@ -23,10 +23,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
 
-	private IUserService userService = null;
+	private static IUserService userService = null;
 
 	public CustomAuthenticationProvider() {
 
+		PasswordHash.init();
 	}
 
 	@Autowired
@@ -52,7 +53,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		User currUser = new User();
 
-		List<User> users = userService.getAllUsers();
+		List<User> users  = userService.getAllUsers();
 
 		for (User user : users) {
 			if (user.getUsername().equals(loginName)) {
