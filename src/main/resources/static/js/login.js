@@ -1,12 +1,10 @@
-// Author Dimitar Kumanov.
-
 // Executes on pressing the enter key in the input fields or pressing the sign-in button.
 const login = function(event) {
 
     // If the sign-in button is clicked the event will be undefined otherwise 
     // 'event' contains the context of the input element which we should check for the pressed key.
     // Enter has a keycode of 13.
-    if (!event || (event && event.keyCode == 13)) {
+    if (!event || (event && event.keyCode === 13)) {
 
         const username = document.getElementById('inputUserForm').value;
         const password = document.getElementById('inputPasswordForm').value;
@@ -25,16 +23,18 @@ const login = function(event) {
 const register = function(event) {
 
     // Same logic as signing in.
-    if (!event || (event && event.keyCode == 13)) {
+    if (!event || (event && event.keyCode === 13)) {
 
         const username = document.getElementById('input2UserForm').value;
+        const fullName = document.getElementById('input2User2Form').value;
+        const address = document.getElementById('input2User3Form').value;
         const password = document.getElementById('input2PasswordForm').value;
         const verificationPassword = document.getElementById('input2Password2Form').value;
 
-        if (password == verificationPassword && verificationPassword.length < 5) {
+        if (password === verificationPassword && verificationPassword.length < 5) {
             showWarningDiv('input2Password2Form', 'The password should be 5 or more characters. Try again?');
 
-        } else if (password != verificationPassword) {
+        } else if (password !== verificationPassword) {
             showWarningDiv('input2Password2Form', 'These passwords don\'t match. Try again?');
 
         } else {
@@ -42,6 +42,8 @@ const register = function(event) {
 
             const data = new FormData();
             data.append('username', username);
+            data.append('fullName', fullName);
+            data.append('address', address);
             data.append('password', password);
 
             xhrRequest('POST', '/log/sign_up', data).then(response => handleRegisterResponse(response), error => console.trace(error));

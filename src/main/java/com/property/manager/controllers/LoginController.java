@@ -45,14 +45,13 @@ public class LoginController {
 	@RequestMapping(value = "log/sign_up")
 	public RegisterResult signUp(
 			@RequestParam(name = "username", required = true) String username,
-			@RequestParam(name = "password", required = true) String password,
 			@RequestParam(name = "fullName", required = true) String fullName,
 			@RequestParam(name = "address", required = true) String address,
-			@RequestParam(name = "id", required = true) int usrId) {
+			@RequestParam(name = "password", required = true) String password) {
 
 		User newUser = null;
 
-		User users = userService.getUserById(usrId);
+		User users = userService.getUserByUsername(username);
 
 		if (username.equals(users.getUsername())) {
 
@@ -66,7 +65,7 @@ public class LoginController {
 
 			if (!hash.equals("")) {
 
-				newUser = new User(username, fullName, hash, "USER", address, usrId);
+				newUser = new User(username, fullName, hash, "USER", address, 0);
 			}
 
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {

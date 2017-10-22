@@ -8,7 +8,7 @@ public interface IUserDAO {
 
 	List<User> getAllUsers();
 
-	User getUserById(int userId);
+	User getUserByUsername(String username);
 
 	void addUser(User user);
 }
