@@ -23,7 +23,7 @@ const xhrRequest = function(method, endpoint, data) {
 
 // Returns a Promise with the user object.
 const getUser = function() {
-    return xhrRequest('GET', '/usr/get_usr').then(user => user
+    return xhrRequest('GET', '/usr').then(user => user
     , err => console.trace(err.message));
 
 };

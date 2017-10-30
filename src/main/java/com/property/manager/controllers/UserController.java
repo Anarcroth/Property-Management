@@ -29,7 +29,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/users", method = GET)
+	@RequestMapping(value = "/usr", method = GET)
 	public ResponseEntity<List<User>> getAllUsers() {
 
 		LOGGER.info("getting all users");
@@ -38,17 +38,17 @@ public class UserController {
 
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
-
-	@RequestMapping(value = "/users", method = POST)
-	public ResponseEntity<String> addUser(@ModelAttribute User user) {
-
-		LOGGER.info("adding user");
-
-		if (userService.addUser(user)) {
-			return new ResponseEntity<String>("added", HttpStatus.CREATED);
-
-		} else {
-			return new ResponseEntity<String>("failed", HttpStatus.I_AM_A_TEAPOT);
-		}
-	}
+//
+//	@RequestMapping(value = "/usr/add_usr", method = POST)
+//	public ResponseEntity<String> addUser(@ModelAttribute User user) {
+//
+//		LOGGER.info("adding user");
+//
+//		if (userService.addUser(user)) {
+//			return new ResponseEntity<String>("added", HttpStatus.CREATED);
+//
+//		} else {
+//			return new ResponseEntity<String>("failed", HttpStatus.I_AM_A_TEAPOT);
+//		}
+//	}
 }

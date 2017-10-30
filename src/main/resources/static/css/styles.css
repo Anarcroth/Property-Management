@@ -26,14 +26,6 @@ body {
     margin-right: 0px;
 }
 
-#documaster-logo {
-    border: 0 none;
-    display: inline-block;
-    height: auto;
-    width: 2rem;
-    vertical-align: middle!important;
-}
-
 .search-row {
     margin-left: 3rem;
     display: inline-block;
@@ -109,8 +101,6 @@ body {
 
 
 /* Body related */
-
-
 
 .section {
     margin-top: 1em;

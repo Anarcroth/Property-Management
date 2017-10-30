@@ -8,6 +8,7 @@ import com.property.manager.rowmappers.UserRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -46,9 +47,18 @@ public class UserDAO implements IUserDAO {
 
 		RowMapper<User> rowMapper = new UserRowMapper();
 
-		User user = this.jdbcTemplate.queryForObject(getUserNameQuery, rowMapper, username);
+		User user = null;
 
-		LOGGER.info("Retrieved user by username");
+		try {
+
+			user = this.jdbcTemplate.queryForObject(getUserNameQuery, rowMapper, username);
+
+			LOGGER.info("Retrieved user by username");
+
+		} catch (EmptyResultDataAccessException erdae) {
+
+			LOGGER.error("No such user by name.");
+		}
 
 		return user;
 	}
