@@ -18,7 +18,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 
-		registry.addViewController("/log").setViewName("login");
+//		registry.addViewController("/log").setViewName("login");
 		registry.addRedirectViewController("", "/log");
 		registry.addRedirectViewController(" ", "/log");
 		registry.addRedirectViewController("/", "/log");

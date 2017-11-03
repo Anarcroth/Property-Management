@@ -55,7 +55,7 @@ const register = function(event) {
 // On successful login, the user gets redirected to the root page.
 const handleLoginResponse = function(response) {
     if (response) {
-        window.location = '/';
+        window.location = '/prop';
     } else {
         showWarningDiv('inputPasswordForm');
     }
