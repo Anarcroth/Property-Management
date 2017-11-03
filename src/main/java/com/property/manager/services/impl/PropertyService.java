@@ -30,14 +30,12 @@ public class PropertyService implements IPropertyService {
 
 	@Override
 	public List<Property> getAllProperties() {
-
 		return propertyDAO.getAllProperties();
 	}
 
 	@Override
 	public Property getPropertyById(int propertyId) {
-
-		return null;
+		return propertyDAO.getPropertyById(propertyId);
 	}
 
 	@Override
