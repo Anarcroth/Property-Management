@@ -23,13 +23,11 @@ public class PropertyDAO implements IPropertyDAO {
 
 	@Autowired
 	public PropertyDAO(JdbcTemplate jdbcTemplate) {
-
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	@Override
 	public List<Property> getAllProperties() {
-
 		String sql = "SELECT * FROM property";
 		RowMapper<Property> rowMapper = new PropertyRowMapper();
 		return this.jdbcTemplate.query(sql, rowMapper);
@@ -37,8 +35,9 @@ public class PropertyDAO implements IPropertyDAO {
 
 	@Override
 	public Property getPropertyById(int propertyId) {
-
-		return null;
+		String sql = "SELECT * FROM property WHERE property_id=" + propertyId;
+		RowMapper<Property> rowMapper = new PropertyRowMapper();
+		return (jdbcTemplate.query(sql, rowMapper)).get(0);
 	}
 
 	@Override

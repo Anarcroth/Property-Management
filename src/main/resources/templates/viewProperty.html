@@ -1,13 +1,13 @@
-<!--/*@thymesVar id="properties" type="java.util.List"*/-->
+<!--/*@thymesVar id="property" type="com.property.manager.models.Property"*/-->
 <!doctype html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Properties</title>
+    <title>Property</title>
 
     <meta charset="utf-8">
-    <meta name="description" content="The Properties Page">
+    <meta name="description" content="View Property Page">
     <meta name="author" content="Tatiana Triukhova, Edor Kacerja, and Martin Nestorov">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#334c58">
@@ -22,17 +22,16 @@
 <div class="container">
 
     <div class="jumbotron">
-        <h1> Properties for rent </h1>
+        <h1> View Property Page </h1>
     </div>
     <div class="row">
 
-        <div class="card col-sm-4" style="width: 20rem; padding: 1rem;" th:each="property : ${properties}">
+        <div class="card col-sm-4" style="width: 20rem; padding: 1rem;">
             <img class="card-img-top" style="width: 100%" src="https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Card image cap">
             <!--<img class="card-img-top" src="${property.pirctureUrl}" alt="Card image cap">-->
             <div class="card-block">
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
                 <p class="card-text" th:text="'Id: ' + ${property.propertyId} + 'Description: ' + ${property.description}"></p>
-                <a th:href="@{/prop(action='viewProperty',propertyId=${property.propertyId})}" class="btn btn-primary">Open Property</a>
             </div>
         </div>
     </div>
