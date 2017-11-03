@@ -2,7 +2,7 @@ package com.property.manager.controllers;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class LoginController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
@@ -37,11 +39,9 @@ public class LoginController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/log")
-	@ResponseBody
-	public ModelAndView loadLogin() {
-
-		return new ModelAndView("login.html");
+	@RequestMapping(path = "/log")
+	public String loadLogin() {
+		return "login";
 	}
 
 	@RequestMapping(value = "/log/sign_up")
