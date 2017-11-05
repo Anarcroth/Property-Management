@@ -2,7 +2,6 @@ package com.property.manager.controllers;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,13 +15,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
@@ -41,6 +36,7 @@ public class LoginController {
 
 	@RequestMapping(path = "/log")
 	public String loadLogin() {
+
 		return "login";
 	}
 
@@ -53,7 +49,8 @@ public class LoginController {
 
 		User newUser = null;
 
-		if (userService.getUserByUsername(username) != null && username.equals(userService.getUserByUsername(username))) {
+		if (userService.getUserByUsername(username) != null && username
+				.equals(userService.getUserByUsername(username))) {
 
 			LOGGER.error("Username already exists.");
 
