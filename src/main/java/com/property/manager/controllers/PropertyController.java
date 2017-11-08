@@ -53,6 +53,8 @@ public class PropertyController {
                 return viewProperty(Integer.parseInt(propertyId), model);
             case "listAllProperties":
                 return listAllProperties(model);
+            case "deleteProperty":
+                return deleteProperty(Integer.parseInt(propertyId), model);
             default:
                 return listAllProperties(model);
         }
@@ -82,11 +84,11 @@ public class PropertyController {
         return propertyService.addProperty(property);
     }
 
-    @RequestMapping(value = "/prop/delete_prop")
-    public void deleteProperty(@RequestParam(name = "propertyId", required = true)int propertyId) {
-
+    public String deleteProperty(int propertyId, Map<String, Object> model) {
         propertyService.deleteProperty(propertyId);
-        
+        List<Property> list = propertyService.getAllProperties();
+        model.put("properties", list);
         LOGGER.info("Deleted property: " + propertyId);
+        return "properties";
     }
 }
