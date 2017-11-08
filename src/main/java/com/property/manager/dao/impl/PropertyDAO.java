@@ -36,6 +36,7 @@ public class PropertyDAO implements IPropertyDAO {
 
 		String sql = "SELECT * FROM property";
 		RowMapper<Property> rowMapper = new PropertyRowMapper();
+
 		return this.jdbcTemplate.query(sql, rowMapper);
 	}
 
@@ -44,6 +45,7 @@ public class PropertyDAO implements IPropertyDAO {
 
 		String sql = "SELECT * FROM property WHERE property_id=" + propertyId;
 		RowMapper<Property> rowMapper = new PropertyRowMapper();
+
 		return (jdbcTemplate.query(sql, rowMapper)).get(0);
 	}
 
@@ -74,12 +76,12 @@ public class PropertyDAO implements IPropertyDAO {
 	}
 
 	@Override
-	public void deleteProperty(int propertyId) {
-
-		String sql = "DELETE FROM property WHERE property_id=" + propertyId;
-		RowMapper<Property> rowMapper = new PropertyRowMapper();
-		jdbcTemplate.update(sql, rowMapper, propertyId);
+	public void deleteProperty(int property_id) {
 
 		LOGGER.info("Deleted property from DB");
+
+		String sql = "DELETE FROM property WHERE property_id=" + property_id;
+		jdbcTemplate.update(sql, property_id);
+
 	}
 }
