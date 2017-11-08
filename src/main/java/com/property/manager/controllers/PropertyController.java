@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -79,5 +80,13 @@ public class PropertyController {
         LOGGER.info("properties get controller");
 
         return propertyService.addProperty(property);
+    }
+
+    @RequestMapping(value = "/prop/delete_prop")
+    public void deleteProperty(@RequestParam(name = "propertyId", required = true)int propertyId) {
+
+        propertyService.deleteProperty(propertyId);
+        
+        LOGGER.info("Deleted property: " + propertyId);
     }
 }

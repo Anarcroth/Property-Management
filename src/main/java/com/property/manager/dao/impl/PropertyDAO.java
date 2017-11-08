@@ -5,6 +5,8 @@ import java.util.List;
 import com.property.manager.dao.IPropertyDAO;
 import com.property.manager.models.Property;
 import com.property.manager.rowmappers.PropertyRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,15 +21,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class PropertyDAO implements IPropertyDAO {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(PropertyDAO.class);
+
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public PropertyDAO(JdbcTemplate jdbcTemplate) {
+
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	@Override
 	public List<Property> getAllProperties() {
+
 		String sql = "SELECT * FROM property";
 		RowMapper<Property> rowMapper = new PropertyRowMapper();
 		return this.jdbcTemplate.query(sql, rowMapper);
@@ -35,6 +41,7 @@ public class PropertyDAO implements IPropertyDAO {
 
 	@Override
 	public Property getPropertyById(int propertyId) {
+
 		String sql = "SELECT * FROM property WHERE property_id=" + propertyId;
 		RowMapper<Property> rowMapper = new PropertyRowMapper();
 		return (jdbcTemplate.query(sql, rowMapper)).get(0);
@@ -51,13 +58,28 @@ public class PropertyDAO implements IPropertyDAO {
 	}
 
 	@Override
-	public boolean propertyExists(String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms, int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl) {
+	public boolean propertyExists(
+			String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms,
+			int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl) {
+
 		String sql = "SELECT count(*) FROM property WHERE type = ? and address=? and description=? and for_sale=? and for_rent=? and no_rooms=? and no_bedrooms=? and no_bathrooms=? and price=? and rent_per_month=? and photo=?";
-		int count = jdbcTemplate.queryForObject(sql, Integer.class, type, address, description, forSale, forRent, numberOfRooms, numberOfBedrooms, numberOfBathrooms, price, rentPerMonth, pictureUrl);
+		int count = jdbcTemplate
+				.queryForObject(sql, Integer.class, type, address, description, forSale, forRent, numberOfRooms,
+						numberOfBedrooms, numberOfBathrooms, price, rentPerMonth, pictureUrl);
 		if (count == 0) {
 			return false;
 		} else {
 			return true;
 		}
+	}
+
+	@Override
+	public void deleteProperty(int propertyId) {
+
+		String sql = "DELETE FROM property WHERE property_id=" + propertyId;
+		RowMapper<Property> rowMapper = new PropertyRowMapper();
+		jdbcTemplate.update(sql, rowMapper, propertyId);
+
+		LOGGER.info("Deleted property from DB");
 	}
 }

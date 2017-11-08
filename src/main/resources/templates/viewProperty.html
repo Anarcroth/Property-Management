@@ -51,13 +51,20 @@
         </div>
     </nav>
     <div class="row">
-
         <div class="card col-sm-4" style="width: 20rem; padding: 1rem;">
-            <img class="card-img-top" style="width: 100%" src="https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Card image cap">
+            <img class="card-img-top" style="width: 100%"
+                 src="https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Card image cap">
             <!--<img class="card-img-top" src="${property.pirctureUrl}" alt="Card image cap">-->
             <div class="card-block">
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
-                <p class="card-text" th:text="'Id: ' + ${property.propertyId} + 'Description: ' + ${property.description}"></p>
+                <p class="card-text"
+                   th:text="'Id: ' + ${property.propertyId} + 'Description: ' + ${property.description}"></p>
+                <div class="btn-delete">
+                    <button class="delete-button">
+                        <a class="delete-btn"
+                           th:href="@{/prop/delete_prop(action='deleteProperty',propertyId=${property.propertyId})}">Delete</a>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
