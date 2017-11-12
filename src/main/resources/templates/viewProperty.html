@@ -59,11 +59,28 @@
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
                 <p class="card-text"
                    th:text="'Id: ' + ${property.propertyId} + 'Description: ' + ${property.description}"></p>
-                <div class="btn-delete">
-                    <button class="delete-button">
-                        <a class="delete-btn"
-                           th:href="@{/prop(action='deleteProperty',propertyId=${property.propertyId})}">Delete</a>
-                    </button>
+                <button class="btn btn-default" data-toggle="modal"
+                        data-target="#confirm-delete">
+                    Delete
+                </button>
+                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                Delete Property
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this property?
+                                These changes might be irreversible!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-danger btn-ok"
+                                   th:href="@{/prop(action='deleteProperty',propertyId=${property.propertyId})}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,6 +98,7 @@
         crossorigin="anonymous"></script>
 <script src="../static/js/global.js"></script>
 <script src="../static/js/login.js"></script>
+<script src="../static/js/viewproperty.js"></script>
 
 </body>
 
