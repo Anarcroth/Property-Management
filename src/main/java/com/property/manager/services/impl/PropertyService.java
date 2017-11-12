@@ -66,5 +66,6 @@ public class PropertyService implements IPropertyService {
 	@Override
 	public void deleteProperty(int propertyId) {
 
+		propertyDAO.deleteProperty(propertyId);
 	}
 }

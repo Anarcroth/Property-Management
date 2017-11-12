@@ -80,7 +80,7 @@ public class PropertyDAO implements IPropertyDAO {
 
 		LOGGER.info("Deleted property from DB");
 
-		String sql = "DELETE FROM property WHERE property_id=" + property_id;
+		String sql = "DELETE FROM property WHERE property_id=?";
 		jdbcTemplate.update(sql, property_id);
 
 	}
