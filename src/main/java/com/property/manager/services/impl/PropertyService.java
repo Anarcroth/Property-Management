@@ -30,11 +30,13 @@ public class PropertyService implements IPropertyService {
 
 	@Override
 	public List<Property> getAllProperties() {
+
 		return propertyDAO.getAllProperties();
 	}
 
 	@Override
 	public Property getPropertyById(int propertyId) {
+
 		return propertyDAO.getPropertyById(propertyId);
 	}
 
@@ -42,19 +44,20 @@ public class PropertyService implements IPropertyService {
 	public ResponseEntity<String> addProperty(Property property) {
 
 		try {
-			if (propertyDAO.propertyExists(property.getType(), property.getAddress(), property.getDescription(), property.isForSale(), property.isForRent(), property.getNumberOfRooms(), property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(), property.getRentPerMonth(), property.getPictureUrl())) {
+			if (propertyDAO.propertyExists(property.getType(), property.getAddress(), property.getDescription(),
+					property.isForSale(), property.isForRent(), property.getNumberOfRooms(),
+					property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(),
+					property.getRentPerMonth(), property.getPictureUrl())) {
 
-				return new ResponseEntity<>("The property already exists",HttpStatus.CONFLICT);
-			}
-			else{
+				return new ResponseEntity<>("The property already exists", HttpStatus.CONFLICT);
+			} else {
 				propertyDAO.addProperty(property);
-				return new ResponseEntity<>("The property is created",HttpStatus.CREATED);
+				return new ResponseEntity<>("The property is created", HttpStatus.CREATED);
 			}
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 
 			LOGGER.error("Could not add property.", e);
-			return new ResponseEntity<>("Something went wrong. Please, check your request",HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Something went wrong. Please, check your request", HttpStatus.BAD_REQUEST);
 		}
 	}
 

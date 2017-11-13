@@ -3,18 +3,20 @@ package com.property.manager.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import com.property.manager.models.Property;
 import com.property.manager.services.IPropertyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by EKAC on 12.10.2017 г..
@@ -79,23 +81,35 @@ public class PropertyController {
 		return "viewProperty";
 	}
 
-	//Accepts form-data through post requests
-	//TODO: check for for null values and duplicate entries(cancel automatically incremented id-s)
-	@RequestMapping(value = "/prop/add_prop", method = POST)
-	public ResponseEntity addProperty(@ModelAttribute Property property) {
-
-		LOGGER.info("properties get controller");
-
-		return propertyService.addProperty(property);
-	}
-
 	public String deleteProperty(int propertyId, Map<String, Object> model) {
+
+		LOGGER.info("Deleting property");
 
 		propertyService.deleteProperty(propertyId);
 
 		List<Property> list = propertyService.getAllProperties();
 		model.put("properties", list);
-		LOGGER.info("Deleted property: " + propertyId);
+
+		return "properties";
+	}
+
+	@RequestMapping(value = "/addProperty", method = RequestMethod.POST)
+	public String addProperty(
+			@Valid @ModelAttribute("property") Property property, Map<String, Object> model, Model newModel,
+			BindingResult bindingResult) {
+
+		LOGGER.info("Adding new property");
+
+		if (bindingResult.hasErrors()) {
+
+		}
+
+		newModel.addAttribute("new property", new Property());
+
+		propertyService.addProperty(property);
+
+		List<Property> list = propertyService.getAllProperties();
+		model.put("property", list);
 
 		return "properties";
 	}

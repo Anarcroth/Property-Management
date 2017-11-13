@@ -57,6 +57,8 @@ public class PropertyDAO implements IPropertyDAO {
 				property.getDescription(), property.isForSale(), property.isForRent(), property.getNumberOfRooms(),
 				property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(),
 				property.getRentPerMonth(), property.getPictureUrl());
+
+		LOGGER.info("Added new property.");
 	}
 
 	@Override
@@ -78,10 +80,9 @@ public class PropertyDAO implements IPropertyDAO {
 	@Override
 	public void deleteProperty(int property_id) {
 
-		LOGGER.info("Deleted property from DB");
-
 		String sql = "DELETE FROM property WHERE property_id=?";
 		jdbcTemplate.update(sql, property_id);
 
+		LOGGER.info("Deleted property from DB");
 	}
 }
