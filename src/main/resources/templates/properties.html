@@ -90,7 +90,7 @@
                     </div>
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <form action="#" th:action="@{/prop}" th:object="${property}" method="post">
+                        <form action="#" th:action="@{/propadd}" th:object="${property}" method="post">
                             <div class="form-group">
                                 <label for="propType">Property type</label>
                                 <input type="text" th:filed="*{type}" class="form-control"
@@ -108,12 +108,12 @@
                             </div>
                             <div align="left"><br>
                                 <label for="sale">Sale
-                                    <input type="radio" th:field="*{forSale}" name="salerent" id="sale"
-                                           placeholder="Sale"/>
+                                    <input type="radio" th:field="*{forSale}" th:value="${0}" name="salerent" id="sale"
+                                           placeholder="Sale"/><br>
                                 </label><br>
                                 <label for="rent">Rent
-                                    <input type="radio" th:field="*{forRent}" name="salerent" id="rent"
-                                           placeholder="Rent" checked/>
+                                    <input type="radio" th:field="*{forRent}" th:value="${1}" name="salerent" id="rent"
+                                           placeholder="Rent" checked/><br>
                                 </label><br>
                                 <hr>
                             </div>

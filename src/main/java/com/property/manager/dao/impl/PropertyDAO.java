@@ -52,7 +52,8 @@ public class PropertyDAO implements IPropertyDAO {
 	@Override
 	public void addProperty(Property property) {
 
-		String sql = "INSERT INTO property (property_id,type, address,description,for_sale,for_rent,no_rooms,no_bedrooms,no_bathrooms,price,rent_per_month,photo) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO property (property_id,type,address,description,for_sale,for_rent,no_rooms,no_bedrooms,no_bathrooms,price,rent_per_month,photo) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+		LOGGER.info("typ: " + property.getType());
 		jdbcTemplate.update(sql, property.getPropertyId(), property.getType(), property.getAddress(),
 				property.getDescription(), property.isForSale(), property.isForRent(), property.getNumberOfRooms(),
 				property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(),
