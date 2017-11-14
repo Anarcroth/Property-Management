@@ -72,8 +72,7 @@ public class PropertyController {
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-		Property property = new Property();
-		model.addAttribute("property", property);
+		model.addAttribute("prop", new Property());
 
 		return "properties";
 	}
@@ -85,6 +84,7 @@ public class PropertyController {
 		Property property = propertyService.getPropertyById(propertyId);
 		model.addAttribute("property", property);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+		model.addAttribute("prop", new Property());
 
 		return "viewProperty";
 	}
@@ -98,13 +98,14 @@ public class PropertyController {
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+		model.addAttribute("prop", new Property());
 
 		return "properties";
 	}
 
-	@RequestMapping(value = "/propadd", method = RequestMethod.POST)
+	@RequestMapping(value = "/prop", method = RequestMethod.POST)
 	public String addProperty(
-			@Valid @ModelAttribute(value = "property") Property property,
+			@Valid @ModelAttribute(value = "prop") Property property,
 			Model model,
 			Authentication authentication) {
 
@@ -115,6 +116,7 @@ public class PropertyController {
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+		model.addAttribute("prop", new Property());
 
 		return "properties";
 	}
