@@ -85,4 +85,14 @@ public class PropertyDAO implements IPropertyDAO {
 
 		LOGGER.info("Deleted property from DB");
 	}
+
+	@Override
+	public List<Property> getRentProperties() {
+		String sql = "SELECT * FROM property WHERE forRent=true";
+		RowMapper<Property> rowMapper = new PropertyRowMapper();
+
+		return this.jdbcTemplate.query(sql, rowMapper);
+	}
+
+
 }

@@ -77,6 +77,8 @@ public class PropertyController {
 		return "properties";
 	}
 
+
+
 	public String viewProperty(int propertyId, Model model, Authentication authentication) {
 
 		LOGGER.info("Getting property by Id");

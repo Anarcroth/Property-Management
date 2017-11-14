@@ -18,4 +18,6 @@ public interface IPropertyDAO {
 	boolean propertyExists(String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms, int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl);
 
 	void deleteProperty(int property_id);
+
+	List<Property> getRentProperties();
 }

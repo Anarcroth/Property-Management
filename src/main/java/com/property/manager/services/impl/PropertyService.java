@@ -71,4 +71,10 @@ public class PropertyService implements IPropertyService {
 
 		propertyDAO.deleteProperty(propertyId);
 	}
+
+	@Override
+	public List<Property> getRentProperties() {
+
+		return propertyDAO.getRentProperties();
+	}
 }

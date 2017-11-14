@@ -19,4 +19,6 @@ public interface IPropertyService {
 	void updateProperty(Property property);
 
 	void deleteProperty(int propertyId);
+
+	List<Property> getRentProperties();
 }
