@@ -90,56 +90,68 @@
                     </div>
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <form action="#" th:action="@{/propadd}" th:object="${property}" method="post">
+                        <form action="#" th:action="@{/prop}" th:object="${prop}" method="post">
                             <div class="form-group">
                                 <label for="propType">Property type</label>
-                                <input type="text" th:filed="*{type}" class="form-control"
+                                <input type="text" th:name="type" th:filed="*{type}" th:value="${prop.getType()}"
+                                       class="form-control"
                                        id="propType" placeholder="Enter property type"/>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" th:field="*{address}" class="form-control"
+                                <input type="text" th:name="address" th:field="*{address}"
+                                       th:value="${prop.getAddress()}" class="form-control"
                                        id="address" placeholder="Enter address"/>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" th:field="*{description}" class="form-control"
+                                <input type="text" th:name="description" th:field="*{description}"
+                                       th:value="${prop.getDescription()}" class="form-control"
                                        id="description" placeholder="Enter description"/>
                             </div>
                             <div align="left"><br>
                                 <label for="sale">Sale
-                                    <input type="radio" th:field="*{forSale}" th:value="${0}" name="salerent" id="sale"
+                                    <input type="radio" th:name="forSale" th:field="*{forSale}"
+                                           th:value="${prop.isForSale()}" name="salerent" id="sale"
                                            placeholder="Sale"/><br>
                                 </label><br>
                                 <label for="rent">Rent
-                                    <input type="radio" th:field="*{forRent}" th:value="${1}" name="salerent" id="rent"
-                                           placeholder="Rent" checked/><br>
+                                    <input type="radio" th:name="forRent" th:field="*{forRent}"
+                                           th:value="${prop.isForRent()}" name="salerent" id="rent"
+                                           placeholder="Rent" checked/>
                                 </label><br>
                                 <hr>
                             </div>
                             <div class="form-group">
                                 <label for="roomsNumber">No. rooms</label>
-                                <input type="text" th:field="*{numberOfRooms}" class="form-control"
+                                <input type="text" th:name="numberOfRooms" th:field="*{numberOfRooms}"
+                                       th:value="${prop.getNumberOfRooms()}" class="form-control"
                                        id="roomsNumber" placeholder="Enter number of rooms"/>
                             </div>
                             <div class="form-group">
                                 <label for="bedroomsNumber">No. bedrooms</label>
                                 <input type="text" class="form-control"
-                                       id="bedroomsNumber" th:field="*{numberOfBedrooms}" placeholder="Enter number of bedrooms"/>
+                                       id="bedroomsNumber" th:name="numberOfBedrooms" th:field="*{numberOfBedrooms}"
+                                       th:value="${prop.getNumberOfBedrooms()}"
+                                       placeholder="Enter number of bedrooms"/>
                             </div>
                             <div class="form-group">
                                 <label for="bathroomsNumber">No. bathrooms</label>
                                 <input type="text" class="form-control"
-                                       id="bathroomsNumber" th:field="*{numberOfBathrooms}" placeholder="Enter number of bathrooms"/>
+                                       id="bathroomsNumber" th:name="numberOfBathrooms" th:field="*{numberOfBathrooms}"
+                                       th:value="${prop.getNumberOfBathrooms()}"
+                                       placeholder="Enter number of bathrooms"/>
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="text" th:field="*{price}" class="form-control"
+                                <input type="text" th:name="price" th:field="*{price}" th:value="${prop.getPrice()}"
+                                       class="form-control"
                                        id="price" placeholder="Enter price"/>
                             </div>
                             <div class="form-group">
                                 <label for="rentPerMonth">Rent per month</label>
-                                <input type="text" th:field="*{rentPerMonth}" class="form-control"
+                                <input type="text" th:name="rentPerMonth" th:field="*{rentPerMonth}"
+                                       th:value="${prop.getRentPerMonth()}" class="form-control"
                                        id="rentPerMonth" placeholder="Enter rent per month"/>
                             </div>
 
