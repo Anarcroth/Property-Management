@@ -55,7 +55,7 @@ public class PropertyController {
 				return listAllProperties(model, authentication);
 			case "deleteProperty":
 				action = null;
-				return deleteProperty(Integer.parseInt(propertyId), model);
+				return deleteProperty(Integer.parseInt(propertyId), model, authentication);
 			default:
 				return listAllProperties(model, authentication);
 		}
@@ -83,7 +83,7 @@ public class PropertyController {
 		return "viewProperty";
 	}
 
-	public String deleteProperty(int propertyId, Map<String, Object> model) {
+	public String deleteProperty(int propertyId, Map<String, Object> model, Authentication authentication) {
 
 		LOGGER.info("Deleting property");
 
@@ -91,6 +91,7 @@ public class PropertyController {
 
 		List<Property> list = propertyService.getAllProperties();
 		model.put("properties", list);
+		model.put("user", userService.getUserByUsername(authentication.getName()));
 
 		return "properties";
 	}
