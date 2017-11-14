@@ -30,6 +30,41 @@ const regprop = function (event) {
         data.append('price', price);
         data.append('rentPerMonth', rentPerMonth);
 
-        xhrRequest('POST', '/prop/addProperty', data).then(response => handleRegisterResponse(response), error => console.trace(error));
+        xhrAddPropRequest('POST', '/prop/addProperty', data).then(response => handleAddPropResponse(response), error => console.trace(error));
+    }
+};
+
+// Makes asynchronous calls to the login API using the supplied arguments.
+const xhrAddPropRequest = function (method, endpoint, data) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.overrideMimeType('application/json');
+        xhr.open(method, endpoint, true);
+        xhr.onload = () => {
+            if (xhr.responseURL && xhr.responseURL.indexOf('error') !== -1) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        };
+        xhr.onerror = () => reject(xhr.statusText);
+        xhr.send(data);
+    });
+};
+
+// Response should be boolean.
+// On successful login, the user gets redirected to the root page.
+const handleAddPropResponse = function (response) {
+    if (response.success) {
+
+        $('#login-btn').click();
+
+        const sectionDiv = document.getElementById('success-alert');
+        sectionDiv.style.display = 'block';
+    } else if (response.error) {
+        showWarningDiv('input2UserForm', response.error);
+    } else {
+        showWarningDiv('input2UserForm');
     }
 };
