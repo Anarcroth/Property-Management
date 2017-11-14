@@ -2,6 +2,8 @@ package com.property.manager.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.property.manager.models.Property;
 import com.property.manager.services.IPropertyService;
 import com.property.manager.services.IUserService;
@@ -45,8 +47,6 @@ public class PropertyController {
 
 		LOGGER.info("Loading properties.");
 
-		model.addAttribute("property", new Property());
-
 		if (action == null) {
 			action = "listAllProperties";
 		}
@@ -72,7 +72,8 @@ public class PropertyController {
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-		model.addAttribute("property", new Property());
+		Property property = new Property();
+		model.addAttribute("property", property);
 
 		return "properties";
 	}
@@ -103,9 +104,9 @@ public class PropertyController {
 		return "properties";
 	}
 
-	@RequestMapping(value = "/prop", method = RequestMethod.POST)
+	@RequestMapping(value = "/propadd", method = RequestMethod.POST)
 	public String addProperty(
-			@ModelAttribute Property property,
+			@Valid @ModelAttribute(value = "property") Property property,
 			Model model,
 			Authentication authentication) {
 
