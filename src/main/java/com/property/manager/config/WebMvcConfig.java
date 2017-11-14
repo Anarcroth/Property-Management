@@ -25,16 +25,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addRedirectViewController("/login", "/log");
 		registry.addRedirectViewController("/login/", "/log");
 	}
-	//
-	//	@Bean
-	//	public TemplateResolver templateResolver() {
-	//		TemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-	//		templateResolver.setPrefix("/resources/templates/");
-	//		templateResolver.setCacheable(false);
-	//		templateResolver.setSuffix(".html");
-	//		templateResolver.setTemplateMode("HTML5");
-	//		return templateResolver;
-	//	}
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {

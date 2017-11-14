@@ -1,22 +1,20 @@
 package com.property.manager.controllers;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.validation.Valid;
 
 import com.property.manager.models.Property;
 import com.property.manager.services.IPropertyService;
+import com.property.manager.services.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 /**
  * Created by EKAC on 12.10.2017 г..
@@ -29,19 +27,25 @@ public class PropertyController {
 
 	private final IPropertyService propertyService;
 
+	private static IUserService userService = null;
+
 	@Autowired
-	public PropertyController(IPropertyService propertyService) {
+	public PropertyController(IPropertyService propertyService, IUserService userService) {
 
 		this.propertyService = propertyService;
+		this.userService = userService;
 	}
 
 	@RequestMapping("/prop")
 	public String loadPropertiesPage(
 			@RequestParam(name = "action", required = false) String action,
 			@RequestParam(name = "propertyId", required = false) String propertyId,
-			Map<String, Object> model) {
+			Model model,
+			Authentication authentication) {
 
 		LOGGER.info("Loading properties.");
+
+		model.addAttribute("property", new Property());
 
 		if (action == null) {
 			action = "listAllProperties";
@@ -49,67 +53,67 @@ public class PropertyController {
 		switch (action) {
 			case "viewProperty":
 				action = null;
-				return viewProperty(Integer.parseInt(propertyId), model);
+				return viewProperty(Integer.parseInt(propertyId), model, authentication);
 			case "listAllProperties":
 				action = null;
-				return listAllProperties(model);
+				return listAllProperties(model, authentication);
 			case "deleteProperty":
 				action = null;
-				return deleteProperty(Integer.parseInt(propertyId), model);
+				return deleteProperty(Integer.parseInt(propertyId), model, authentication);
 			default:
-				return listAllProperties(model);
+				return listAllProperties(model, authentication);
 		}
 	}
 
-	public String listAllProperties(Map<String, Object> model) {
+	public String listAllProperties(Model model, Authentication authentication) {
 
 		LOGGER.info("Getting all properties");
 
 		List<Property> list = propertyService.getAllProperties();
-		model.put("properties", list);
+		model.addAttribute("properties", list);
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+		model.addAttribute("property", new Property());
 
 		return "properties";
 	}
 
-	public String viewProperty(int propertyId, Map<String, Object> model) {
+	public String viewProperty(int propertyId, Model model, Authentication authentication) {
 
 		LOGGER.info("Getting property by Id");
 
 		Property property = propertyService.getPropertyById(propertyId);
-		model.put("property", property);
+		model.addAttribute("property", property);
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 
 		return "viewProperty";
 	}
 
-	public String deleteProperty(int propertyId, Map<String, Object> model) {
+	public String deleteProperty(int propertyId, Model model, Authentication authentication) {
 
 		LOGGER.info("Deleting property");
 
 		propertyService.deleteProperty(propertyId);
 
 		List<Property> list = propertyService.getAllProperties();
-		model.put("properties", list);
+		model.addAttribute("properties", list);
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 
 		return "properties";
 	}
 
-	@RequestMapping(value = "/addProperty", method = RequestMethod.POST)
+	@RequestMapping(value = "/prop", method = RequestMethod.POST)
 	public String addProperty(
-			@Valid @ModelAttribute("property") Property property, Map<String, Object> model, Model newModel,
-			BindingResult bindingResult) {
+			@ModelAttribute Property property,
+			Model model,
+			Authentication authentication) {
 
 		LOGGER.info("Adding new property");
-
-		if (bindingResult.hasErrors()) {
-
-		}
-
-		newModel.addAttribute("new property", new Property());
 
 		propertyService.addProperty(property);
 
 		List<Property> list = propertyService.getAllProperties();
-		model.put("property", list);
+		model.addAttribute("properties", list);
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 
 		return "properties";
 	}
