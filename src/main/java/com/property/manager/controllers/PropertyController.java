@@ -84,7 +84,7 @@ public class PropertyController {
 		Property property = propertyService.getPropertyById(propertyId);
 		model.addAttribute("property", property);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-		model.addAttribute("prop", new Property());
+//		model.addAttribute("prop", new Property());
 
 		return "viewProperty";
 	}
