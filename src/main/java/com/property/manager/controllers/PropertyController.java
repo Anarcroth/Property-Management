@@ -1,7 +1,6 @@
 package com.property.manager.controllers;
 
 import java.util.List;
-
 import javax.validation.Valid;
 
 import com.property.manager.models.Property;
@@ -12,11 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.Model;
 
 /**
  * Created by EKAC on 12.10.2017 г..
@@ -84,7 +83,7 @@ public class PropertyController {
 		Property property = propertyService.getPropertyById(propertyId);
 		model.addAttribute("property", property);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-//		model.addAttribute("prop", new Property());
+		//		model.addAttribute("prop", new Property());
 
 		return "viewProperty";
 	}
@@ -119,5 +118,23 @@ public class PropertyController {
 		model.addAttribute("prop", new Property());
 
 		return "properties";
+	}
+
+	@RequestMapping(value = "/makeOffer", method = RequestMethod.POST)
+	public String makeOffer(
+			@Valid @ModelAttribute(value = "property") Property property,
+			Model model,
+			Authentication authentication) {
+
+		LOGGER.info("Making an offer");
+
+		LOGGER.info("The offer is : " + property.getPropertyId());
+
+		propertyService.updateProperty(property);
+
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+		model.addAttribute("property", property);
+
+		return "viewProperty";
 	}
 }

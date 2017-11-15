@@ -15,7 +15,12 @@ public interface IPropertyDAO {
 
 	void addProperty(Property property);
 
-	boolean propertyExists(String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms, int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl);
+	boolean propertyExists(
+			String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms,
+			int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl,
+			double offer);
 
 	void deleteProperty(int property_id);
+
+	void updateProperty(Property property);
 }

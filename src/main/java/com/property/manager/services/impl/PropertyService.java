@@ -47,7 +47,7 @@ public class PropertyService implements IPropertyService {
 			if (propertyDAO.propertyExists(property.getType(), property.getAddress(), property.getDescription(),
 					property.isForSale(), property.isForRent(), property.getNumberOfRooms(),
 					property.getNumberOfBedrooms(), property.getNumberOfBathrooms(), property.getPrice(),
-					property.getRentPerMonth(), property.getPictureUrl())) {
+					property.getRentPerMonth(), property.getPictureUrl(), property.getOffer())) {
 
 				return new ResponseEntity<>("The property already exists", HttpStatus.CONFLICT);
 			} else {
@@ -64,6 +64,7 @@ public class PropertyService implements IPropertyService {
 	@Override
 	public void updateProperty(Property property) {
 
+		propertyDAO.updateProperty(property);
 	}
 
 	@Override
