@@ -20,7 +20,9 @@ public interface IPropertyDAO {
 			int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl,
 			double offer);
 
-	List<Property> filterProperties(String forSale, String forRent, String numberOfRooms, String price,String numberOfBedrooms,String numberOfBathrooms,String type,String address);
+	List<Property> filterProperties(
+			String forSale, String forRent, String numberOfRooms, String price, String numberOfBedrooms,
+			String numberOfBathrooms, String type, String address);
 
 	void deleteProperty(int propertyId);
 
