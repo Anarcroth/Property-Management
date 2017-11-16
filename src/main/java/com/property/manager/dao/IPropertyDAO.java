@@ -20,7 +20,7 @@ public interface IPropertyDAO {
 			int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl,
 			double offer);
 
-	void deleteProperty(int property_id);
+	void deleteProperty(int propertyId);
 
-	void updateProperty(Property property);
+	void updateProperty(int propertyId, double offer);
 }

@@ -62,9 +62,9 @@ public class PropertyService implements IPropertyService {
 	}
 
 	@Override
-	public void updateProperty(Property property) {
+	public void updateProperty(int propertyId, double offer) {
 
-		propertyDAO.updateProperty(property);
+		propertyDAO.updateProperty(propertyId, offer);
 	}
 
 	@Override

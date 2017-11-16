@@ -79,20 +79,20 @@ public class PropertyDAO implements IPropertyDAO {
 	}
 
 	@Override
-	public void deleteProperty(int property_id) {
+	public void deleteProperty(int propertyId) {
 
 		String sql = "DELETE FROM property WHERE property_id=?";
-		jdbcTemplate.update(sql, property_id);
+		jdbcTemplate.update(sql, propertyId);
 
 		LOGGER.info("Deleted property from DB");
 	}
 
 	@Override
-	public void updateProperty(Property property) {
+	public void updateProperty(int propertyId, double offer) {
 
 		String sql = "UPDATE property SET offer=? WHERE property_id=?";
-		jdbcTemplate.update(sql, property.getOffer(), property.getPropertyId());
+		jdbcTemplate.update(sql, offer, propertyId);
 
-		LOGGER.info("Updated property: " + property.getOffer());
+		LOGGER.info("Updated offer for property " + propertyId);
 	}
 }

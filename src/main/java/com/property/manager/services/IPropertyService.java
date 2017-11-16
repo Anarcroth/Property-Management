@@ -16,7 +16,7 @@ public interface IPropertyService {
 
 	ResponseEntity addProperty(Property property);
 
-	void updateProperty(Property property);
+	void updateProperty(int propertyId, double offer);
 
 	void deleteProperty(int propertyId);
 }

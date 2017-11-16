@@ -69,6 +69,7 @@ public class PropertyController {
 		LOGGER.info("Getting all properties");
 
 		List<Property> list = propertyService.getAllProperties();
+		
 		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 		model.addAttribute("prop", new Property());
@@ -128,13 +129,13 @@ public class PropertyController {
 
 		LOGGER.info("Making an offer");
 
-		LOGGER.info("The offer is : " + property.getPropertyId());
+		propertyService.updateProperty(property.getPropertyId(), property.getOffer());
 
-		propertyService.updateProperty(property);
-
+		List<Property> list = propertyService.getAllProperties();
+		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-		model.addAttribute("property", property);
+		model.addAttribute("prop", new Property());
 
-		return "viewProperty";
+		return "properties";
 	}
 }
