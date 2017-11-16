@@ -120,7 +120,7 @@ public class PropertyController {
 		return "properties";
 	}
 
-	@RequestMapping(value = "/makeOffer", method = RequestMethod.POST)
+	@RequestMapping(value = "/makeOffer")
 	public String makeOffer(
 			@Valid @ModelAttribute(value = "property") Property property,
 			Model model,
