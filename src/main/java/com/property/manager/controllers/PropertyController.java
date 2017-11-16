@@ -82,6 +82,7 @@ public class PropertyController {
 		LOGGER.info("Getting all properties");
 
 		List<Property> list = propertyService.getAllProperties();
+		
 		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 		model.addAttribute("prop", new Property());
@@ -136,7 +137,7 @@ public class PropertyController {
 		Property property = propertyService.getPropertyById(propertyId);
 		model.addAttribute("property", property);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-		model.addAttribute("prop", new Property());
+		//		model.addAttribute("prop", new Property());
 
 		return "viewProperty";
 	}
@@ -164,6 +165,24 @@ public class PropertyController {
 		LOGGER.info("Adding new property");
 
 		propertyService.addProperty(property);
+
+		List<Property> list = propertyService.getAllProperties();
+		model.addAttribute("properties", list);
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+		model.addAttribute("prop", new Property());
+
+		return "properties";
+	}
+
+	@RequestMapping(value = "/makeOffer")
+	public String makeOffer(
+			@Valid @ModelAttribute(value = "property") Property property,
+			Model model,
+			Authentication authentication) {
+
+		LOGGER.info("Making an offer");
+
+		propertyService.updateProperty(property.getPropertyId(), property.getOffer());
 
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);

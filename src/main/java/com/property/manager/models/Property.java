@@ -17,6 +17,7 @@ public class Property {
 	private double price;
 	private double rentPerMonth;
 	private String pictureUrl;
+	private double offer;
 
 	public Property() {
 
@@ -25,7 +26,7 @@ public class Property {
 	public Property(
 			int propertyId, String type, String address, String description, boolean forSale, boolean forRent,
 			int numberOfRooms, int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth,
-			String pictureUrl) {
+			String pictureUrl, double offer) {
 
 		this.propertyId = propertyId;
 		this.type = type;
@@ -39,6 +40,7 @@ public class Property {
 		this.price = price;
 		this.rentPerMonth = rentPerMonth;
 		this.pictureUrl = pictureUrl;
+		this.offer = offer;
 	}
 
 	public int getPropertyId() {
@@ -159,5 +161,15 @@ public class Property {
 	public void setPictureUrl(String pictureUrl) {
 
 		this.pictureUrl = pictureUrl;
+	}
+
+	public double getOffer() {
+
+		return offer;
+	}
+
+	public void setOffer(double offer) {
+
+		this.offer = offer;
 	}
 }

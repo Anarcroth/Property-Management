@@ -27,6 +27,7 @@ public class PropertyRowMapper implements RowMapper<Property> {
 		property.setPrice(rs.getDouble("price"));
 		property.setRentPerMonth(rs.getDouble("rent_per_month"));
 		property.setPictureUrl(rs.getString("photo"));
+		property.setOffer(rs.getDouble("offer"));
 		return property;
 	}
 }

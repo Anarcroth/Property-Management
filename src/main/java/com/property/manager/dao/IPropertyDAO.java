@@ -15,10 +15,14 @@ public interface IPropertyDAO {
 
 	void addProperty(Property property);
 
-	boolean propertyExists(String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms, int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl);
-
-	void deleteProperty(int property_id);
+	boolean propertyExists(
+			String type, String address, String description, boolean forSale, boolean forRent, int numberOfRooms,
+			int numberOfBedrooms, int numberOfBathrooms, double price, double rentPerMonth, String pictureUrl,
+			double offer);
 
 	List<Property> filterProperties(String forSale, String forRent, String numberOfRooms, String price,String numberOfBedrooms,String numberOfBathrooms,String type,String address);
 
+	void deleteProperty(int propertyId);
+
+	void updateProperty(int propertyId, double offer);
 }

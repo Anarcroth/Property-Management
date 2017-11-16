@@ -103,13 +103,12 @@
             <div class="card-block">
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
                 <p class="card-text"
-                   th:text="'Id: ' + ${property.propertyId} + 'Description: ' + ${property.description}"></p>
+                   th:text="'Id: ' + ${property.propertyId} + ' Description: ' + ${property.description} + ' Offer: ' + ${property.offer}"></p>
                 <a th:href="@{/prop(action='viewProperty',propertyId=${property.propertyId})}"
                    class="btn btn-primary">Open Property</a>
             </div>
         </div>
     </div>
-
 
     <div th:object="${user}" th:if="${user.getRole() == 'ADMIN'}">
         <!-- Button trigger modal -->
