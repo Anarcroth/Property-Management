@@ -42,10 +42,25 @@ public class PropertyController {
 	public String loadPropertiesPage(
 			@RequestParam(name = "action", required = false) String action,
 			@RequestParam(name = "propertyId", required = false) String propertyId,
+			@RequestParam(name = "numberOfRooms",required = false) String numberOfRooms,
+			@RequestParam(name = "forSale",required = false) String forSale,
+			@RequestParam(name = "forRent",required = false) String forRent,
+			@RequestParam(name="price",required=false) String price,
+			@RequestParam(name = "numberOfBedrooms",required = false) String numberOfBedrooms,
+			@RequestParam(name = "numberOfBathrooms",required = false) String numberOfBathrooms,
+			@RequestParam(name="type",required=false) String type,
+			@RequestParam(name="address",required=false) String address,
+
+
+
+
+
+
 			Model model,
 			Authentication authentication) {
 
 		LOGGER.info("Loading properties.");
+		LOGGER.info(action);
 
 		if (action == null) {
 			action = "listAllProperties";
@@ -60,6 +75,9 @@ public class PropertyController {
 			case "deleteProperty":
 				action = null;
 				return deleteProperty(Integer.parseInt(propertyId), model, authentication);
+			case "filterProperties":
+				action = null;
+				return filterProperties(forSale,forRent,numberOfRooms,price,numberOfBedrooms,numberOfBathrooms,type,address,model,authentication);
 			default:
 				return listAllProperties(model, authentication);
 		}
@@ -78,6 +96,51 @@ public class PropertyController {
 	}
 
 
+	public String filterProperties(String forSale, String forRent, String numberOfRooms,String price, String numberOfBedrooms,String numberOfBathrooms,String type,String address, Model model, Authentication authentication){
+
+		LOGGER.info("Filtering");
+
+
+		if(forSale!= null && forSale.equals("on")){
+			forSale="true";
+		}
+
+		if(forRent!= null && forRent.equals("on")){
+			forRent="true";
+		}
+		if(numberOfRooms.isEmpty())
+		{
+			numberOfRooms=null;
+		}
+		if(numberOfBedrooms.isEmpty())
+		{
+			numberOfBedrooms=null;
+		}
+		if(numberOfBathrooms.isEmpty())
+		{
+			numberOfBathrooms=null;
+		}
+		if(type.isEmpty())
+		{
+			type=null;
+		}
+		if(address.isEmpty())
+		{
+			address=null;
+		}
+		LOGGER.info(forRent);
+
+
+		List<Property>list = propertyService.filterProperties(forSale,forRent,numberOfRooms,price,numberOfBedrooms,numberOfBathrooms,type,address);
+		model.addAttribute("properties",list);
+		model.addAttribute("prop", new Property());
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+
+
+		return "properties";
+	}
+
+
 
 	public String viewProperty(int propertyId, Model model, Authentication authentication) {
 
@@ -90,6 +153,19 @@ public class PropertyController {
 
 		return "viewProperty";
 	}
+//	public String roomsFilter(int no_rooms,Model model, Authentication authentication ){
+//
+//		LOGGER.info("Getting properties by number of rooms");
+//
+//		List<Property>list = propertyService.roomsFilter(no_rooms);
+//		model.addAttribute("properties",list);
+//		model.addAttribute("prop", new Property());
+//		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+//
+//		return "properties";
+//	}
+
+
 
 	public String deleteProperty(int propertyId, Model model, Authentication authentication) {
 
@@ -104,6 +180,7 @@ public class PropertyController {
 
 		return "properties";
 	}
+
 
 	@RequestMapping(value = "/prop", method = RequestMethod.POST)
 	public String addProperty(

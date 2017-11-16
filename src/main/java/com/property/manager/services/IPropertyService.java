@@ -20,5 +20,7 @@ public interface IPropertyService {
 
 	void deleteProperty(int propertyId);
 
-	List<Property> getRentProperties();
+
+
+	List<Property> filterProperties(String forSale, String forRent, String numberOfRooms,String price,String numberOfBedrooms,String numberOfBathrooms,String type,String address);
 }
