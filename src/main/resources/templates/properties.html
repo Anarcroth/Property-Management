@@ -66,7 +66,7 @@
 
         <label for="price">Price Range</label>
         <select name="price">
-            <option value="null"> Any </option>
+            <option value="null"> Any</option>
             <option value="<30,000"><30,000</option>
             <option value="30,000 - 70,000">30,000 - 70,000</option>
             <option value=">70,000"> >70,000</option>
@@ -79,24 +79,23 @@
         <input type="text" id="numberOfBathrooms" th:name="numberOfBathrooms" maxlength="2" style="width: 30px"/>
 
 
-
         <input type="hidden" id="action" th:name="action" th:value="filterProperties"/>
 
-        <label for="type" >Type of Property</label>
+        <label for="type">Type of Property</label>
         <select name="type" id="type">
-            <option value="null"> Any </option>
+            <option value="null"> Any</option>
             <option value="house">House</option>
             <option value="apartment">Apartment</option>
         </select>
 
         <label for="address">Country</label>
-        <input type="text"  th:name="address"/>
+        <input type="text" th:name="address"/>
 
         <button type="submit">Apply Filters</button>
 
     </form>
 
-     <div class="row">
+    <div class="row">
         <div class="card col-sm-4" style="width: 20rem; padding: 1rem;" th:each="property : ${properties}">
             <img class="card-img-top" style="width: 100%"
                  src="https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Card image cap">
@@ -110,8 +109,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     <div th:object="${user}" th:if="${user.getRole() == 'ADMIN'}">
@@ -159,13 +156,13 @@
                             <div align="left"><br>
                                 <label for="sale">Sale
                                     <input type="checkbox" th:name="forSale" th:field="*{forSale}"
-                                           th:value="${prop.isForSale()}"  id="sale"
+                                           th:value="${prop.isForSale()}" id="sale"
                                            placeholder="Sale"/><br>
                                 </label><br>
                                 <label for="rent">Rent
                                     <input type="checkbox" th:name="forRent" th:field="*{forRent}"
-                                           th:value="${prop.isForRent()}"  id="rent"
-                                           placeholder="Rent" />
+                                           th:value="${prop.isForRent()}" id="rent"
+                                           placeholder="Rent"/>
                                 </label><br>
                                 <hr>
                             </div>

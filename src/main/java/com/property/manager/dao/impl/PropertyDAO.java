@@ -87,21 +87,21 @@ public class PropertyDAO implements IPropertyDAO {
 		LOGGER.info("Deleted property from DB");
 	}
 
-
-
-	public List<Property> filterProperties(String forSale,String forRent, String no_rooms, String price,String no_bedrooms,String no_bathrooms,String type,String address){
+	public List<Property> filterProperties(
+			String forSale, String forRent, String no_rooms, String price, String no_bedrooms, String no_bathrooms,
+			String type, String address) {
 
 		String sql = "SELECT * FROM property WHERE property_id > -1";
-		if(forSale!=null){
-			sql=sql+" AND for_sale="+forSale;
+		if (forSale != null) {
+			sql = sql + " AND for_sale=" + forSale;
 		}
-		if(forRent!=null){
-			sql=sql+" AND for_rent="+forRent;
+		if (forRent != null) {
+			sql = sql + " AND for_rent=" + forRent;
 		}
-		if(no_rooms!=null){
-			sql=sql+" AND no_rooms="+no_rooms;
+		if (no_rooms != null) {
+			sql = sql + " AND no_rooms=" + no_rooms;
 		}
-		if(price!=null) {
+		if (price != null) {
 			if (price.equals("<30,000")) {
 				sql = sql + " AND Price<30000";
 			}
@@ -112,30 +112,28 @@ public class PropertyDAO implements IPropertyDAO {
 				sql = sql + " AND Price>70000";
 			}
 		}
-			if(no_bedrooms!=null){
-				sql=sql+" AND no_bedrooms="+no_bedrooms;
+		if (no_bedrooms != null) {
+			sql = sql + " AND no_bedrooms=" + no_bedrooms;
+		}
+		if (no_bathrooms != null) {
+			sql = sql + " AND no_bathrooms=" + no_bathrooms;
+		}
+		if (type != null) {
+			if (type.equals("house")) {
+				sql = sql + " AND type = 'house'";
 			}
-			if(no_bathrooms!=null){
-				sql=sql+" AND no_bathrooms="+no_bathrooms;
+			if (type.equals("apartment")) {
+				sql = sql + " AND type = 'apartment'";
 			}
-			if(type!=null) {
-				if(type.equals("house")){
-				sql = sql + " AND type = 'house'";}
-				if(type.equals("apartment")){
-					sql = sql + " AND type = 'apartment'";}
-			}
-			if(address!=null)
-			{
-				sql = sql + " AND address='" +address+"'";
-			}
-
+		}
+		if (address != null) {
+			sql = sql + " AND address='" + address + "'";
+		}
 
 		RowMapper<Property> rowMapper = new PropertyRowMapper();
 
 		return this.jdbcTemplate.query(sql, rowMapper);
 
-
 	}
-
 
 }
