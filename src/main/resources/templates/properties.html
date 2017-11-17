@@ -43,7 +43,7 @@
                         Settings
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdown-settings">
-                        <a class="dropdown-item" href="./user.html">Profile</a>
+                        <!--<a classlass="dropdown-item" href="./user.html">Profile</a>-->
                         <a class="dropdown-item" href="/log/logout">Log Оut</a>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
             <div class="card-block">
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
                 <p class="card-text"
-                   th:text="'Id: ' + ${property.propertyId} + ' Description: ' + ${property.description}"></p>
+                   th:text="'Location: ' + ${property.address} + ' Description: ' + ${property.description}"></p>
                 <a th:href="@{/prop(action='viewProperty',propertyId=${property.propertyId})}"
                    class="btn btn-primary">Open Property</a>
             </div>

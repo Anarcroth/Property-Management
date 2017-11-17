@@ -54,7 +54,7 @@ public class PropertyController {
 			Model model,
 			Authentication authentication) {
 
-		LOGGER.info("Loading properties.");
+		LOGGER.info("Loading properties page.");
 
 		if (action == null) {
 			action = "listAllProperties";
@@ -80,7 +80,7 @@ public class PropertyController {
 
 	public String listAllProperties(Model model, Authentication authentication) {
 
-		LOGGER.info("Getting all properties");
+		LOGGER.info("Listing all properties.");
 
 		List<Property> list = propertyService.getAllProperties();
 
@@ -95,7 +95,7 @@ public class PropertyController {
 			String forSale, String forRent, String numberOfRooms, String price, String numberOfBedrooms,
 			String numberOfBathrooms, String type, String address, Model model, Authentication authentication) {
 
-		LOGGER.info("Filtering");
+		LOGGER.info("Filtering properties.");
 
 		if (forSale != null && forSale.equals("on")) {
 			forSale = "true";
@@ -133,7 +133,7 @@ public class PropertyController {
 
 	public String viewProperty(int propertyId, Model model, Authentication authentication) {
 
-		LOGGER.info("Getting property by Id");
+		LOGGER.info("Viewing property by id.");
 
 		Property property = propertyService.getPropertyById(propertyId);
 		List<Offer> offerList = offerService.getAllOffers();
@@ -157,7 +157,7 @@ public class PropertyController {
 
 	public String deleteProperty(int propertyId, Model model, Authentication authentication) {
 
-		LOGGER.info("Deleting property");
+		LOGGER.info("Deleting property by id.");
 
 		propertyService.deleteProperty(propertyId);
 
@@ -175,7 +175,7 @@ public class PropertyController {
 			Model model,
 			Authentication authentication) {
 
-		LOGGER.info("Adding new property");
+		LOGGER.info("Adding new property.");
 
 		propertyService.addProperty(property);
 
@@ -194,7 +194,7 @@ public class PropertyController {
 			Model model,
 			Authentication authentication) {
 
-		LOGGER.info("Making an offer");
+		LOGGER.info("Making an offer to property " + property.getPropertyId());
 
 		LOGGER.info("The offer is : " + newOffer.getOfferToBuy());
 
