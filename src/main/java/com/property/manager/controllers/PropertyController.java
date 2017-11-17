@@ -100,7 +100,6 @@ public class PropertyController {
 		if (forSale != null && forSale.equals("on")) {
 			forSale = "true";
 		}
-
 		if (forRent != null && forRent.equals("on")) {
 			forRent = "true";
 		}
@@ -119,6 +118,7 @@ public class PropertyController {
 		if (address.isEmpty()) {
 			address = null;
 		}
+
 		LOGGER.info(forRent);
 
 		List<Property> list = propertyService
@@ -139,7 +139,6 @@ public class PropertyController {
 		List<Offer> offerList = offerService.getAllOffers();
 
 		Iterator<Offer> iter = offerList.iterator();
-
 		while (iter.hasNext()) {
 			Offer o = iter.next();
 
@@ -148,9 +147,10 @@ public class PropertyController {
 			}
 		}
 
-		model.addAttribute("property", property);
-		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 		model.addAttribute("offers", offerList);
+		model.addAttribute("property", property);
+		model.addAttribute("newOffer", new Offer());
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 
 		return "viewProperty";
 	}
@@ -189,13 +189,20 @@ public class PropertyController {
 
 	@RequestMapping(value = "/makeOffer")
 	public String makeOffer(
+			@Valid @ModelAttribute(value = "newOffer") Offer newOffer,
 			@Valid @ModelAttribute(value = "property") Property property,
 			Model model,
 			Authentication authentication) {
 
 		LOGGER.info("Making an offer");
 
-		propertyService.updateProperty(property.getPropertyId(), property.getOffer());
+		LOGGER.info("The offer is : " + newOffer.getOfferType() + " - " + newOffer.getOfferAmount());
+
+		newOffer.setUserId(userService.getUserByUsername(authentication.getName()).getId());
+		newOffer.setOfferId(offerService.getAllOffers().size() + 1);
+		newOffer.setPropertyId(property.getPropertyId());
+
+		offerService.addOffer(newOffer);
 
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);

@@ -16,8 +16,8 @@ public class Offer {
 
 		this.userId = userId;
 		this.offerId = offerId;
-		this.propertyId = propertyId;
 		this.offerType = offerType;
+		this.propertyId = propertyId;
 		this.offerAmount = offerAmount;
 	}
 

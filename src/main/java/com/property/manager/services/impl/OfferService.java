@@ -40,7 +40,15 @@ public class OfferService implements IOfferService{
 	@Override
 	public ResponseEntity<String> addOffer(Offer offer) {
 
-		return new ResponseEntity<String>("adding", HttpStatus.CREATED);
+		try {
+			offerDAO.addOffer(offer);
+			return new ResponseEntity<String>("adding", HttpStatus.CREATED);
+
+		} catch (Exception e) {
+
+			LOGGER.error("Could not add property.", e);
+			return new ResponseEntity<String>("Something went wrong. Please, check your request", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@Override
