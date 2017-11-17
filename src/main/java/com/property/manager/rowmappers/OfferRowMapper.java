@@ -16,9 +16,8 @@ public class OfferRowMapper implements RowMapper<Offer> {
 		offer.setOfferId(rs.getInt("offer_id"));
 		offer.setUserId(rs.getInt("user_id"));
 		offer.setPropertyId(rs.getInt("property_id"));
-		offer.setOfferToBuy(rs.getBoolean("buy"));
-		offer.setOfferToRent(rs.getBoolean("rent"));
-		offer.setOfferAmount(rs.getDouble("amount"));
+		offer.setOfferToBuy(rs.getDouble("buy"));
+		offer.setOfferToRent(rs.getDouble("rent"));
 
 		return offer;
 	}

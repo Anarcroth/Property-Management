@@ -48,19 +48,19 @@ public class OfferDAO implements IOfferDAO {
 	@Override
 	public void addOffer(Offer offer) {
 
-		String sql = "INSERT INTO offer (offer_id,user_id,property_id,buy,rent,amount) values (?,?,?,?,?,?)";
-		jdbcTemplate.update(sql, offer.getOfferId(), offer.getUserId(), offer.getPropertyId(), offer.isOfferToBuy(),
-				offer.isOfferToRent(), offer.getOfferAmount());
+		String sql = "INSERT INTO offer (offer_id,user_id,property_id,buy,rent) values (?,?,?,?,?)";
+		jdbcTemplate.update(sql, offer.getOfferId(), offer.getUserId(), offer.getPropertyId(), offer.getOfferToBuy(),
+				offer.getOfferToRent());
 
 		LOGGER.info("Added new offer");
 
 	}
 
 	@Override
-	public void updateOffer(int offerId, double amount) {
+	public void updateOffer(int offerId, double offerToBuy, double offerToRent) {
 
-		String sql = "UPDATE offer SET amount=? WHERE offer_id=?";
-		jdbcTemplate.update(sql, amount, offerId);
+		String sql = "UPDATE offer SET buy=?, rent=? WHERE offer_id=?";
+		jdbcTemplate.update(sql, offerToBuy, offerToRent, offerId);
 
 		LOGGER.info("Updated amount for offer " + offerId);
 	}
