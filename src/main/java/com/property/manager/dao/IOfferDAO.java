@@ -12,7 +12,7 @@ public interface IOfferDAO {
 
 	void addOffer(Offer offer);
 
-	void updateOffer(int offerId);
+	void updateOffer(int offerId, double amount);
 
 	void deleteOffer(int offerId);
 }

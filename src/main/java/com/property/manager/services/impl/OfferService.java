@@ -42,9 +42,9 @@ public class OfferService implements IOfferService{
 	}
 
 	@Override
-	public void updateOffer(int offerId) {
+	public void updateOffer(int offerId, double amount) {
 
-		offerDAO.updateOffer(offerId);
+		offerDAO.updateOffer(offerId, amount);
 	}
 
 	@Override
