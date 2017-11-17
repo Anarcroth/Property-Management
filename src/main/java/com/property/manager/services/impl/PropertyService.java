@@ -12,9 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by EKAC on 12.10.2017 г..
- */
 @Service
 public class PropertyService implements IPropertyService {
 

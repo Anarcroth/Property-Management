@@ -111,6 +111,12 @@
                         </div>
                     </div>
                 </div>
+                <div th:object="${user}" th:if="${user.getRole() == 'USER'}">
+                    <div class="card-block" th:each="offer : ${offers}">
+                        <p class="card-text"
+                           th:text="'Offer amount: ' + ${offer.offerAmount}"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

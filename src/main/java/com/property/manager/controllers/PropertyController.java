@@ -3,7 +3,9 @@ package com.property.manager.controllers;
 import java.util.List;
 import javax.validation.Valid;
 
+import com.property.manager.models.Offer;
 import com.property.manager.models.Property;
+import com.property.manager.services.IOfferService;
 import com.property.manager.services.IPropertyService;
 import com.property.manager.services.IUserService;
 import org.slf4j.Logger;
@@ -17,24 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * Created by EKAC on 12.10.2017 г..
- */
-
 @Controller
 public class PropertyController {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(PropertyController.class);
 
-	private final IPropertyService propertyService;
+	private static IPropertyService propertyService = null;
 
 	private static IUserService userService = null;
 
+	private static IOfferService offerService = null;
+
 	@Autowired
-	public PropertyController(IPropertyService propertyService, IUserService userService) {
+	public PropertyController(IPropertyService propertyService, IUserService userService, IOfferService offerService) {
 
 		this.propertyService = propertyService;
 		this.userService = userService;
+		this.offerService = offerService;
 	}
 
 	@RequestMapping("/prop")
@@ -137,6 +138,12 @@ public class PropertyController {
 		Property property = propertyService.getPropertyById(propertyId);
 		model.addAttribute("property", property);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+
+		List<Offer> offerList = offerService.getAllOffers();
+		for (Offer o : offerList) {
+			LOGGER.info("am: " + o.getOfferAmount());
+		}
+		model.addAttribute("offers", offerList);
 		//		model.addAttribute("prop", new Property());
 
 		return "viewProperty";
