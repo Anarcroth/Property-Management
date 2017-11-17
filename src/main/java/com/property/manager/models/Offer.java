@@ -5,18 +5,20 @@ public class Offer {
 	private int userId;
 	private int offerId;
 	private int propertyId;
-	private String offerType;
+	private boolean offerToBuy;
+	private boolean offerToRent;
 	private double offerAmount;
 
 	public Offer() {
 
 	}
 
-	public Offer(int userId, int offerId, int propertyId, String offerType, double offerAmount) {
+	public Offer(int userId, int offerId, int propertyId, boolean offerToBuy, boolean offerToRent, double offerAmount) {
 
 		this.userId = userId;
 		this.offerId = offerId;
-		this.offerType = offerType;
+		this.offerToBuy = offerToBuy;
+		this.offerToRent = offerToRent;
 		this.propertyId = propertyId;
 		this.offerAmount = offerAmount;
 	}
@@ -51,14 +53,24 @@ public class Offer {
 		this.propertyId = propertyId;
 	}
 
-	public String getOfferType() {
+	public boolean isOfferToBuy() {
 
-		return offerType;
+		return offerToBuy;
 	}
 
-	public void setOfferType(String offerType) {
+	public void setOfferToBuy(boolean offerToBuy) {
 
-		this.offerType = offerType;
+		this.offerToBuy = offerToBuy;
+	}
+
+	public boolean isOfferToRent() {
+
+		return offerToRent;
+	}
+
+	public void setOfferToRent(boolean offerToRent) {
+
+		this.offerToRent = offerToRent;
 	}
 
 	public double getOfferAmount() {

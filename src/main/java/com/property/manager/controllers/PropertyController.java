@@ -196,7 +196,7 @@ public class PropertyController {
 
 		LOGGER.info("Making an offer");
 
-		LOGGER.info("The offer is : " + newOffer.getOfferType() + " - " + newOffer.getOfferAmount());
+		LOGGER.info("The offer is : " + newOffer.isOfferToBuy() + " - " + newOffer.getOfferAmount());
 
 		newOffer.setUserId(userService.getUserByUsername(authentication.getName()).getId());
 		newOffer.setOfferId(offerService.getAllOffers().size() + 1);
