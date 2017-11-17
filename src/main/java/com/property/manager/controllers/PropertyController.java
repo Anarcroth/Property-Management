@@ -1,5 +1,6 @@
 package com.property.manager.controllers;
 
+import java.util.Iterator;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -54,7 +55,6 @@ public class PropertyController {
 			Authentication authentication) {
 
 		LOGGER.info("Loading properties.");
-		LOGGER.info(action);
 
 		if (action == null) {
 			action = "listAllProperties";
@@ -83,7 +83,7 @@ public class PropertyController {
 		LOGGER.info("Getting all properties");
 
 		List<Property> list = propertyService.getAllProperties();
-		
+
 		model.addAttribute("properties", list);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
 		model.addAttribute("prop", new Property());
@@ -136,15 +136,21 @@ public class PropertyController {
 		LOGGER.info("Getting property by Id");
 
 		Property property = propertyService.getPropertyById(propertyId);
+		List<Offer> offerList = offerService.getAllOffers();
+
+		Iterator<Offer> iter = offerList.iterator();
+
+		while (iter.hasNext()) {
+			Offer o = iter.next();
+
+			if (propertyId != o.getPropertyId()) {
+				iter.remove();
+			}
+		}
+
 		model.addAttribute("property", property);
 		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-
-		List<Offer> offerList = offerService.getAllOffers();
-		for (Offer o : offerList) {
-			LOGGER.info("am: " + o.getOfferAmount());
-		}
 		model.addAttribute("offers", offerList);
-		//		model.addAttribute("prop", new Property());
 
 		return "viewProperty";
 	}

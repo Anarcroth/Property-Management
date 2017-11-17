@@ -57,7 +57,7 @@
             <div class="card-block">
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
                 <p class="card-text"
-                   th:text="'Id: ' + ${property.propertyId} + 'Description: ' + ${property.description} + ' Offers: ' + ${property.offer}"></p>
+                   th:text="'Id: ' + ${property.propertyId} + 'Description: ' + ${property.description}"></p>
 
                 <div th:object="${user}" th:if="${user.getRole() == 'ADMIN'}">
                     <button class="btn btn-default" data-toggle="modal"
@@ -111,10 +111,12 @@
                         </div>
                     </div>
                 </div>
-                <div th:object="${user}" th:if="${user.getRole() == 'USER'}">
-                    <div class="card-block" th:each="offer : ${offers}">
-                        <p class="card-text"
-                           th:text="'Offer amount: ' + ${offer.offerAmount}"></p>
+                <div th:object="${user}" th:if="${user.getRole() == 'ADMIN'}">
+                    <div th:object="${offers}" th:if="${offers != null}">
+                        <div class="card-block" th:each="offer : ${offers}">
+                            <p class="card-text"
+                               th:text="'Offer amount: ' + ${offer.offerAmount} + ', for: ' + ${offer.offerType}"></p>
+                        </div>
                     </div>
                 </div>
             </div>
