@@ -64,6 +64,10 @@
                             data-target="#confirm-delete">
                         Delete
                     </button>
+                    <button class="btn btn-default" data-toggle="modal"
+                            data-target="#update-descr">
+                        Edit Description
+                    </button>
                 </div>
                 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                      aria-hidden="true">
@@ -80,6 +84,27 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 <a class="btn btn-danger btn-ok"
                                    th:href="@{/prop(action='deleteProperty',propertyId=${property.propertyId})}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="update-descr" tabindex="-1" role="dialog" aria-labelledby="update-descr"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                Edit Description
+                            </div>
+                            <div class="modal-body">
+                                <form action="#" th:action="@{/editProperty}" th:object="${property}" method="post">
+                                    <div class="form-group">
+                                        <label for=property">New Description</label>
+                                        <input type="text" th:name="description" th:field="*{description}"
+                                               th:value="${property.getDescription()}" class="form-control"/>
+
+                                    </div>
+                                    <buttom type="submit" class="btn btn-default">Submit</buttom>
+                                </form>
                             </div>
                         </div>
                     </div>
