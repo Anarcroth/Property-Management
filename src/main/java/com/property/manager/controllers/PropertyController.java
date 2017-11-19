@@ -198,9 +198,11 @@ public class PropertyController {
 	}
 
 	@RequestMapping(value = "/approveOffer")
-	public String approveOffer(int offerId, int propertyId, Model model, Authentication authentication) {
+	public String approveOffer(int userId, int offerId, int propertyId, Model model, Authentication authentication) {
 
 		LOGGER.info("Approving offer by id.");
+
+		userService.approveUserOffer(userId, offerId);
 
 		Property property = propertyService.getPropertyById(propertyId);
 		List<Offer> offerList = offerService.getAllOffers();

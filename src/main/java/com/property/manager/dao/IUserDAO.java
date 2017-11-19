@@ -11,4 +11,6 @@ public interface IUserDAO {
 	User getUserByUsername(String username);
 
 	void addUser(User user);
+
+	void approveUserOffer(int userId, int offerId);
 }

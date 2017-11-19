@@ -61,4 +61,10 @@ public class UserService implements IUserService {
 	public void deleteUser(int userId) {
 
 	}
+
+	@Override
+	public void approveUserOffer(int userId, int offerId) {
+
+		userDAO.approveUserOffer(userId, offerId);
+	}
 }

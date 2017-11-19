@@ -2,23 +2,19 @@ package com.property.manager.models;
 
 public class User {
 
-	private String username;
-
-	private String fullName;
-
-	private String password;
-
-	private String address;
-
-	private String role;
-
 	private int id;
+	private int approvedOffer;
+	private String role;
+	private String address;
+	private String username;
+	private String fullName;
+	private String password;
 
 	public User() {
 
 	}
 
-	public User(String username, String fullName, String password, String address, String role, int id) {
+	public User(String username, String fullName, String password, String address, String role, int id, int approvedOffer) {
 
 		this.username = username;
 		this.fullName = fullName;
@@ -26,6 +22,7 @@ public class User {
 		this.address = address;
 		this.role = role;
 		this.id = id;
+		this.approvedOffer = approvedOffer;
 	}
 
 	public final String getUsername() {
@@ -86,5 +83,15 @@ public class User {
 	public void setId(int id) {
 
 		this.id = id;
+	}
+
+	public int getApprovedOffer() {
+
+		return approvedOffer;
+	}
+
+	public void setApprovedOffer(int approvedOffer) {
+
+		this.approvedOffer = approvedOffer;
 	}
 }

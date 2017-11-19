@@ -62,7 +62,7 @@ public class LoginController {
 
 			if (!hash.equals("")) {
 
-				newUser = new User(username, fullName, hash, address, "USER", 0);
+				newUser = new User(username, fullName, hash, address, "USER", 0, 0);
 			}
 
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {

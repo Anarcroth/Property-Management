@@ -66,10 +66,19 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public void addUser(User user) {
 
-		String addUserQuery = "INSERT INTO user (id,full_name,address,username,password,role) values (?,?,?,?,?,?)";
+		String addUserQuery = "INSERT INTO user (id,full_name,address,username,password,role,approved_offer) values (?,?,?,?,?,?,?)";
 		jdbcTemplate.update(addUserQuery, user.getId(), user.getFullName(), user.getAddress(), user.getUsername(),
-				user.getPassword(), user.getRole());
+				user.getPassword(), user.getRole(), user.getApprovedOffer());
 
 		LOGGER.info("Added user to DB.");
+	}
+
+	@Override
+	public void approveUserOffer(int userId, int offerId) {
+
+		String addOfferToUser = "UPDATE user SET approved_offer=? WHERE id=?";
+		jdbcTemplate.update(addOfferToUser, offerId, userId);
+
+		LOGGER.info("Added offer to user.");
 	}
 }

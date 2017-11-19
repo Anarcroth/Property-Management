@@ -15,4 +15,6 @@ public interface IUserService {
 	void updateUser(User user);
 
 	void deleteUser(int userId);
+
+	void approveUserOffer(int userId, int offerId);
 }
