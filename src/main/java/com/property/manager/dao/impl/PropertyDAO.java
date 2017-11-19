@@ -144,4 +144,13 @@ public class PropertyDAO implements IPropertyDAO {
 
 		LOGGER.info("Updated offer for property " + propertyId);
 	}
+
+	@Override
+	public void updatePropertyDescription(int propertyId, String descr) {
+
+		String sql = "UPDATE property SET description=? WHERE property_id=?";
+		jdbcTemplate.update(sql, descr, propertyId);
+
+		LOGGER.info("Updated description of property " + propertyId);
+	}
 }

@@ -23,4 +23,6 @@ public interface IPropertyService {
 	List<Property> filterProperties(
 			String forSale, String forRent, String numberOfRooms, String price, String numberOfBedrooms,
 			String numberOfBathrooms, String type, String address);
+
+	public void updatePropertyDescription(int propertyId, String descr);
 }

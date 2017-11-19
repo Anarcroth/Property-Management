@@ -266,4 +266,22 @@ public class PropertyController {
 
 		return "properties";
 	}
+
+	@RequestMapping(value = "/editProperty")
+	public String editProperty(
+			@Valid @ModelAttribute(value = "property") Property property,
+			Model model,
+			Authentication authentication) {
+
+		LOGGER.info("Updating description of property");
+
+
+
+		List<Property> list = propertyService.getAllProperties();
+		model.addAttribute("properties", list);
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+		model.addAttribute("prop", new Property());
+
+		return "properties";
+	}
 }

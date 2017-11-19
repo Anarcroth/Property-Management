@@ -27,4 +27,6 @@ public interface IPropertyDAO {
 	void deleteProperty(int propertyId);
 
 	void updateProperty(int propertyId, double offer);
+
+	public void updatePropertyDescription(int propertyId, String descr);
 }
