@@ -130,6 +130,8 @@
                                     data-target="#confirm-offer-delete">
                                 Delete
                             </button>
+                            <a class="btn btn-ok btn-default"
+                               th:href="@{/approveOffer(offerId=${offer.offerId},propertyId=${property.propertyId})}">Approve</a>
                             <div class="modal fade" id="confirm-offer-delete" tabindex="-1" role="dialog"
                                  aria-labelledby="myModalLabel"
                                  aria-hidden="true">

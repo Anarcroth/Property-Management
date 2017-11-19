@@ -197,6 +197,31 @@ public class PropertyController {
 
 	}
 
+	@RequestMapping(value = "/approveOffer")
+	public String approveOffer(int offerId, int propertyId, Model model, Authentication authentication) {
+
+		LOGGER.info("Approving offer by id.");
+
+		Property property = propertyService.getPropertyById(propertyId);
+		List<Offer> offerList = offerService.getAllOffers();
+
+		Iterator<Offer> iter = offerList.iterator();
+		while (iter.hasNext()) {
+			Offer o = iter.next();
+
+			if (propertyId != o.getPropertyId()) {
+				iter.remove();
+			}
+		}
+
+		model.addAttribute("offers", offerList);
+		model.addAttribute("property", property);
+		model.addAttribute("newOffer", new Offer());
+		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+
+		return "viewProperty";
+	}
+
 	@RequestMapping(value = "/prop", method = RequestMethod.POST)
 	public String addProperty(
 			@Valid @ModelAttribute(value = "prop") Property property,
