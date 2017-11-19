@@ -6,6 +6,7 @@ public class User {
 	private int approvedOffer;
 	private String role;
 	private String address;
+	private String email;
 	private String username;
 	private String fullName;
 	private String password;
@@ -14,12 +15,13 @@ public class User {
 
 	}
 
-	public User(String username, String fullName, String password, String address, String role, int id, int approvedOffer) {
+	public User(String username, String fullName, String password, String address,String email, String role, int id, int approvedOffer) {
 
 		this.username = username;
 		this.fullName = fullName;
 		this.password = password;
 		this.address = address;
+		this.email = email;
 		this.role = role;
 		this.id = id;
 		this.approvedOffer = approvedOffer;
@@ -38,6 +40,11 @@ public class User {
 	public final String getAddress() {
 
 		return address;
+	}
+
+	public final String getEmail(){
+
+		return email;
 	}
 
 	public final String getPassword() {
@@ -68,6 +75,11 @@ public class User {
 	public void setAddress(String address) {
 
 		this.address = address;
+	}
+
+	public void setEmail(String email){
+
+		this.email = email;
 	}
 
 	public void setPassword(String password) {

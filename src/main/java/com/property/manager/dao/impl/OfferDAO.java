@@ -39,7 +39,7 @@ public class OfferDAO implements IOfferDAO {
 	@Override
 	public Offer getOfferById(int offerId) {
 
-		String sql = "SELECT * FROM offfer WHERE offer_id=" + offerId;
+		String sql = "SELECT * FROM offer WHERE offer_id=" + offerId;
 		RowMapper<Offer> rowMapper = new OfferRowMapper();
 
 		return (jdbcTemplate.query(sql, rowMapper)).get(0);

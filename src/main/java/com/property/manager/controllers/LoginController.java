@@ -45,7 +45,8 @@ public class LoginController {
 			@RequestParam(name = "username", required = true) String username,
 			@RequestParam(name = "fullName", required = true) String fullName,
 			@RequestParam(name = "address", required = true) String address,
-			@RequestParam(name = "password", required = true) String password) {
+            @RequestParam(name = "email", required = true) String email,
+            @RequestParam(name = "password", required = true) String password) {
 
 		User newUser = null;
 
@@ -62,7 +63,7 @@ public class LoginController {
 
 			if (!hash.equals("")) {
 
-				newUser = new User(username, fullName, hash, address, "USER", 0, 0);
+				newUser = new User(username, fullName, hash, address,email, "USER", 0, 0);
 			}
 
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
