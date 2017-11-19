@@ -169,6 +169,7 @@ public class PropertyController {
 		return "properties";
 	}
 
+	@RequestMapping(value = "/deleteOffer")
 	public String deleteOffer(int offerId, int propertyId, Model model, Authentication authentication) {
 
 		LOGGER.info("Deleting offer by id.");
