@@ -66,8 +66,8 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public void addUser(User user) {
 
-		String addUserQuery = "INSERT INTO user (id,full_name,address,username,password,role) values (?,?,?,?,?,?)";
-		jdbcTemplate.update(addUserQuery, user.getId(), user.getFullName(), user.getAddress(), user.getUsername(),
+		String addUserQuery = "INSERT INTO user (id,full_name,address,email,username,password,role) values (?,?,?,?,?,?,?)";
+		jdbcTemplate.update(addUserQuery, user.getId(), user.getFullName(), user.getAddress(),user.getEmail(),user.getUsername(),
 				user.getPassword(), user.getRole());
 
 		LOGGER.info("Added user to DB.");

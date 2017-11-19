@@ -28,6 +28,7 @@ const register = function(event) {
         const username = document.getElementById('input2UserForm').value;
         const fullName = document.getElementById('input2User2Form').value;
         const address = document.getElementById('input2User3Form').value;
+        const email = document.getElementById('email').value;
         const password = document.getElementById('input2PasswordForm').value;
         const verificationPassword = document.getElementById('input2Password2Form').value;
 
@@ -44,6 +45,7 @@ const register = function(event) {
             data.append('username', username);
             data.append('fullName', fullName);
             data.append('address', address);
+            data.append('email', email);
             data.append('password', password);
 
             xhrRequest('POST', '/log/sign_up', data).then(response => handleRegisterResponse(response), error => console.trace(error));
