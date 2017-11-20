@@ -4,5 +4,8 @@ import com.property.manager.services.impl.EmailService;
 
 public interface IEmailService {
 
-    void sendMessage(String email);
+
+    void sendApprovalMessage(String email);
+
+    void sendDeclineMessage(String email);
 }

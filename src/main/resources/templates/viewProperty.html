@@ -15,6 +15,10 @@
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"
           media="screen">
     <link rel="stylesheet" href="">
+    <style>
+       .row{padding-top:2%;}
+       .card{width:20rem;padding:1rem;margin:20px;}
+    </style>
 </head>
 
 <body>
@@ -25,7 +29,7 @@
     </div>
     <nav class="navbar navbar-toggleable-md navbar-inverse px-0">
         <div class="container px-0 search-container">
-            <div class="search-row col-xl-12 col-lg-12 col-md-11 col-sm-11 col-11 px-0">
+            <div class="search-row col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 px-0">
                 <div class="input-group">
                     <input type="text" class="form-control" id="search-box" placeholder="Search"
                            onkeydown="searchFor(event)">
@@ -50,7 +54,7 @@
         </div>
     </nav>
     <div class="row">
-        <div class="card col-sm-4" style="width: 20rem; padding: 1rem;">
+        <div class="card col-sm-4">
             <img class="card-img-top" style="width: 100%"
                  src="https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Card image cap">
             <!--<img class="card-img-top" src="${property.pirctureUrl}" alt="Card image cap">-->
@@ -173,7 +177,7 @@
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
                                             </button>
                                             <a class="btn btn-danger btn-ok"
-                                               th:href="@{/deleteOffer(offerId=${offer.offerId},propertyId=${property.propertyId})}">Delete</a>
+                                               th:href="@{/deleteOffer(userId=${offer.userId},offerId=${offer.offerId},propertyId=${property.propertyId})}">Delete</a>
                                         </div>
                                     </div>
                                 </div>

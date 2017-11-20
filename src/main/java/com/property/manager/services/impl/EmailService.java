@@ -18,13 +18,25 @@ public class EmailService implements IEmailService {
     }
 
     @Override
-    public void sendMessage(String email) {
+    public void sendApprovalMessage(String email) {
 
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(email);
         mail.setFrom("prop.mgmt.cos315@gmail.com");
         mail.setSubject("Property Offer");
         mail.setText("Congratulations! Your offer has been approved!");
+
+        javaMailSender.send(mail);
+
+    }
+    @Override
+    public void sendDeclineMessage(String email) {
+
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setTo(email);
+        mail.setFrom("prop.mgmt.cos315@gmail.com");
+        mail.setSubject("Property Offer");
+        mail.setText("Unfortunately, your offer has not been approved.");
 
         javaMailSender.send(mail);
 

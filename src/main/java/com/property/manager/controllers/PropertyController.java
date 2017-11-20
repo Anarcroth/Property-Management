@@ -175,11 +175,14 @@ public class PropertyController {
 	}
 
 	@RequestMapping(value = "/deleteOffer")
-	public String deleteOffer(int offerId, int propertyId, Model model, Authentication authentication) {
+	public String deleteOffer(int userId, int offerId, int propertyId, Model model, Authentication authentication) {
 
 		LOGGER.info("Deleting offer by id.");
 
 		offerService.deleteOffer(offerId);
+
+		User user = userService.getUserByID(String.valueOf(userId));
+		emailService.sendDeclineMessage(user.getEmail());
 
 		Property property = propertyService.getPropertyById(propertyId);
 		List<Offer> offerList = offerService.getAllOffers();
@@ -210,7 +213,7 @@ public class PropertyController {
 		userService.approveUserOffer(userId, offerId);
 
 		User user = userService.getUserByID(String.valueOf(userId));
-		emailService.sendMessage(user.getEmail());
+		emailService.sendApprovalMessage(user.getEmail());
 
 		Property property = propertyService.getPropertyById(propertyId);
 		List<Offer> offerList = offerService.getAllOffers();
