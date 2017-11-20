@@ -98,7 +98,7 @@
                             <div class="modal-body">
                                 <form action="#" th:action="@{/editProperty}" th:object="${property}" method="post">
                                     <div class="form-group">
-                                        <label for=property">New Description</label>
+                                        <label for="property">New Description</label>
                                         <input type="text" th:name="description" th:field="*{description}"
                                                th:value="${property.getDescription()}" class="form-control"
                                                id="description" placeholder="Enter new description"/>

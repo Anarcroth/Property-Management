@@ -81,11 +81,11 @@ const handleRegisterResponse = function(response) {
 };
 
 const showWarningDiv = function(inputElementId, message) {
-    const intputElement = document.getElementById(inputElementId);
-    const rowDiv = intputElement.parentElement.parentElement;
+    const inputElement = document.getElementById(inputElementId);
+    const rowDiv = inputElement.parentElement.parentElement;
     const feedbackDiv = rowDiv.children[1].children[1];
     rowDiv.classList.add('has-danger');
-    intputElement.classList.add('form-control-danger');
+    inputElement.classList.add('form-control-danger');
     if (message) {
         feedbackDiv.innerHTML = message;
     }
@@ -93,11 +93,11 @@ const showWarningDiv = function(inputElementId, message) {
 };
 
 const hideWarningDiv = function(inputElementId) {
-    const intputElement = document.getElementById(inputElementId);
-    const rowDiv = intputElement.parentElement.parentElement;
+    const inputElement = document.getElementById(inputElementId);
+    const rowDiv = inputElement.parentElement.parentElement;
     const feedbackDiv = rowDiv.children[1].children[1];
     rowDiv.classList.remove('has-danger');
-    intputElement.classList.remove('form-control-danger');
+    inputElement.classList.remove('form-control-danger');
     feedbackDiv.style.display = 'none';
 };
 

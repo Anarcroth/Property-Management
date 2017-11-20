@@ -6,9 +6,11 @@ import javax.validation.Valid;
 
 import com.property.manager.models.Offer;
 import com.property.manager.models.Property;
+import com.property.manager.models.User;
 import com.property.manager.services.IOfferService;
 import com.property.manager.services.IPropertyService;
 import com.property.manager.services.IUserService;
+import com.property.manager.services.IEmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +33,15 @@ public class PropertyController {
 
 	private static IOfferService offerService = null;
 
+	private static IEmailService emailService = null;
+
 	@Autowired
-	public PropertyController(IPropertyService propertyService, IUserService userService, IOfferService offerService) {
+	public PropertyController(IPropertyService propertyService, IUserService userService, IOfferService offerService,IEmailService emailService) {
 
 		this.propertyService = propertyService;
 		this.userService = userService;
 		this.offerService = offerService;
+		this.emailService = emailService;
 	}
 
 	@RequestMapping("/prop")
@@ -203,6 +208,9 @@ public class PropertyController {
 		LOGGER.info("Approving offer by id.");
 
 		userService.approveUserOffer(userId, offerId);
+
+		User user = userService.getUserByID(String.valueOf(userId));
+		emailService.sendMessage(user.getEmail());
 
 		Property property = propertyService.getPropertyById(propertyId);
 		List<Offer> offerList = offerService.getAllOffers();

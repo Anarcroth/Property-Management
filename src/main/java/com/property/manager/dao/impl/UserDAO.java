@@ -64,9 +64,32 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
+	public User getUserById(String id) {
+
+		String sql = "SELECT * FROM user WHERE id = ?";
+
+		RowMapper<User> rowMapper = new UserRowMapper();
+
+		User user = null;
+
+		try {
+
+			user = this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+
+			LOGGER.info("Retrieved user by user id");
+
+		} catch (EmptyResultDataAccessException erdae) {
+
+			LOGGER.error("No such user by id.");
+		}
+
+		return user;
+	}
+
+	@Override
 	public void addUser(User user) {
 
-		String addUserQuery = "INSERT INTO user (id,full_name,address,username,password,role,approved_offer) values (?,?,?,?,?,?,?)";
+		String addUserQuery = "INSERT INTO user (id,full_name,address,email,username,password,role,approved_offer) values (?,?,?,?,?,?,?,?)";
 		jdbcTemplate.update(addUserQuery, user.getId(), user.getFullName(), user.getAddress(),user.getEmail(), user.getUsername(),
 				user.getPassword(), user.getRole(), user.getApprovedOffer());
 

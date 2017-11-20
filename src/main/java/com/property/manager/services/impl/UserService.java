@@ -37,6 +37,12 @@ public class UserService implements IUserService {
 	}
 
 	@Override
+	public User getUserByID(String id) {
+
+		return userDAO.getUserById(id);
+	}
+
+	@Override
 	public boolean addUser(User user) {
 
 		try {

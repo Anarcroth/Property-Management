@@ -10,6 +10,8 @@ public interface IUserDAO {
 
 	User getUserByUsername(String username);
 
+	User getUserById(String id);
+
 	void addUser(User user);
 
 	void approveUserOffer(int userId, int offerId);
