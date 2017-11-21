@@ -49,6 +49,8 @@ public class PropertyDAO implements IPropertyDAO {
 		return (jdbcTemplate.query(sql, rowMapper)).get(0);
 	}
 
+
+
 	@Override
 	public void addProperty(Property property) {
 

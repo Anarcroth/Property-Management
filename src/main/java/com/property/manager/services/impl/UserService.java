@@ -73,4 +73,6 @@ public class UserService implements IUserService {
 
 		userDAO.approveUserOffer(userId, offerId);
 	}
+
+
 }

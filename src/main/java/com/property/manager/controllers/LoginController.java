@@ -42,11 +42,11 @@ public class LoginController {
 
 	@RequestMapping(value = "/log/sign_up")
 	public RegisterResult signUp(
-			@RequestParam(name = "username", required = true) String username,
-			@RequestParam(name = "fullName", required = true) String fullName,
-			@RequestParam(name = "address", required = true) String address,
-            @RequestParam(name = "email", required = true) String email,
-            @RequestParam(name = "password", required = true) String password) {
+			@RequestParam(name = "username", required = false) String username,
+			@RequestParam(name = "fullName", required = false) String fullName,
+			@RequestParam(name = "address", required = false) String address,
+            @RequestParam(name = "email", required = false) String email,
+            @RequestParam(name = "password", required = false) String password) {
 
 		User newUser = null;
 

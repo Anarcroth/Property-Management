@@ -97,6 +97,8 @@ public class UserDAO implements IUserDAO {
 		LOGGER.info("Added user to DB.");
 	}
 
+
+
 	@Override
 	public void approveUserOffer(int userId, int offerId) {
 
