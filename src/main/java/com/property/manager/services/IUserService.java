@@ -10,9 +10,9 @@ public interface IUserService {
 
 	User getUserByUsername(String username);
 
-    User getUserByID(String id);
+	User getUserByID(String id);
 
-    boolean addUser(User user);
+	boolean addUser(User user);
 
 	void updateUser(User user);
 

@@ -7,10 +7,10 @@ import javax.validation.Valid;
 import com.property.manager.models.Offer;
 import com.property.manager.models.Property;
 import com.property.manager.models.User;
+import com.property.manager.services.IEmailService;
 import com.property.manager.services.IOfferService;
 import com.property.manager.services.IPropertyService;
 import com.property.manager.services.IUserService;
-import com.property.manager.services.IEmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,9 @@ public class PropertyController {
 	private static IEmailService emailService = null;
 
 	@Autowired
-	public PropertyController(IPropertyService propertyService, IUserService userService, IOfferService offerService,IEmailService emailService) {
+	public PropertyController(
+			IPropertyService propertyService, IUserService userService, IOfferService offerService,
+			IEmailService emailService) {
 
 		this.propertyService = propertyService;
 		this.userService = userService;
@@ -285,8 +287,6 @@ public class PropertyController {
 			Authentication authentication) {
 
 		LOGGER.info("Updating description of property");
-
-
 
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);

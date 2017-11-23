@@ -90,14 +90,12 @@ public class UserDAO implements IUserDAO {
 	public void addUser(User user) {
 
 		String addUserQuery = "INSERT INTO user (id,full_name,address,email,username,password,role,approved_offer) values (?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(addUserQuery, user.getId(), user.getFullName(), user.getAddress(),user.getEmail(), user.getUsername(),
+		jdbcTemplate.update(addUserQuery, user.getId(), user.getFullName(), user.getAddress(), user.getEmail(),
+				user.getUsername(),
 				user.getPassword(), user.getRole(), user.getApprovedOffer());
-
 
 		LOGGER.info("Added user to DB.");
 	}
-
-
 
 	@Override
 	public void approveUserOffer(int userId, int offerId) {

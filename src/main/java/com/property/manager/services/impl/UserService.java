@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements IUserService {
 
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
 	private static IUserDAO userDAO = null;
@@ -73,6 +72,5 @@ public class UserService implements IUserService {
 
 		userDAO.approveUserOffer(userId, offerId);
 	}
-
 
 }

@@ -1,6 +1,8 @@
 package com.property.manager.services.impl;
 
 import com.property.manager.services.IEmailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -9,36 +11,41 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService implements IEmailService {
 
-    private JavaMailSender javaMailSender;
+	public static final Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
 
-    @Autowired
-    public void EmailService(JavaMailSender javaMailSender) {
+	private JavaMailSender javaMailSender;
 
-        this.javaMailSender = javaMailSender;
-    }
+	@Autowired
+	public void EmailService(JavaMailSender javaMailSender) {
 
-    @Override
-    public void sendApprovalMessage(String email) {
+		this.javaMailSender = javaMailSender;
+	}
 
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(email);
-        mail.setFrom("prop.mgmt.cos315@gmail.com");
-        mail.setSubject("Property Offer");
-        mail.setText("Congratulations! Your offer has been approved!");
+	@Override
+	public void sendApprovalMessage(String email) {
 
-        javaMailSender.send(mail);
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(email);
+		mail.setFrom("prop.mgmt.cos315@gmail.com");
+		mail.setSubject("Property Offer");
+		mail.setText("Congratulations! Your offer has been approved!");
 
-    }
-    @Override
-    public void sendDeclineMessage(String email) {
+		javaMailSender.send(mail);
 
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(email);
-        mail.setFrom("prop.mgmt.cos315@gmail.com");
-        mail.setSubject("Property Offer");
-        mail.setText("Unfortunately, your offer has not been approved.");
+		LOGGER.info("Sent approval email");
+	}
 
-        javaMailSender.send(mail);
+	@Override
+	public void sendDeclineMessage(String email) {
 
-    }
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(email);
+		mail.setFrom("prop.mgmt.cos315@gmail.com");
+		mail.setSubject("Property Offer");
+		mail.setText("Unfortunately, your offer has not been approved.");
+
+		javaMailSender.send(mail);
+
+		LOGGER.info("Sent decline email");
+	}
 }

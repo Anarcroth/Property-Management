@@ -16,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -28,7 +30,6 @@ public class UserController {
 	private static IUserService userService = null;
 	private static IPropertyService propertyService = null;
 	private static IOfferService offerService = null;
-
 
 	@Autowired
 	public UserController(IUserService userService, IPropertyService propertyService, IOfferService offerService) {

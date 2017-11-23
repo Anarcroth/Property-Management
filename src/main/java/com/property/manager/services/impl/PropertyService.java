@@ -70,8 +70,13 @@ public class PropertyService implements IPropertyService {
 		propertyDAO.deleteProperty(propertyId);
 	}
 
-	public List<Property> filterProperties(String forSale, String forRent, String numberOfRooms,String price,String numberOfBedrooms, String numberOfBathrooms, String type,String address){
-		return propertyDAO.filterProperties(forSale, forRent, numberOfRooms,price,numberOfBedrooms,numberOfBathrooms,type,address);
+	public List<Property> filterProperties(
+			String forSale, String forRent, String numberOfRooms, String price, String numberOfBedrooms,
+			String numberOfBathrooms, String type, String address) {
+
+		return propertyDAO
+				.filterProperties(forSale, forRent, numberOfRooms, price, numberOfBedrooms, numberOfBathrooms, type,
+						address);
 	}
 
 	@Override

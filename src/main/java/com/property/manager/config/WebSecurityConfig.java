@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		// CSRF has to be disabled in order not to throw an error during runtime.
-		http	.csrf().disable()
+		http.csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/home", "/js/**", "/css/**", "/img/**", "/log/sign_up").permitAll()
 				.anyRequest().authenticated()

@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OfferService implements IOfferService{
+public class OfferService implements IOfferService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OfferService.class);
 
@@ -47,7 +47,8 @@ public class OfferService implements IOfferService{
 		} catch (Exception e) {
 
 			LOGGER.error("Could not add property.", e);
-			return new ResponseEntity<String>("Something went wrong. Please, check your request", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(
+					"Something went wrong. Please, check your request", HttpStatus.BAD_REQUEST);
 		}
 	}
 
