@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Login/Sign Up</title>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"
           media="screen">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/login.css}">
 </head>
 
 <body>
@@ -39,10 +39,6 @@
                 <div class="card">
                     <div class="card-block">
                         <div class="form-group row mt-4">
-                            <div class="offset-md-2 offset-3 col-md-8 col-9 alert alert-success" id="success-alert"
-                                 role="alert">
-                                You successfully registered! Please, sign-in.
-                            </div>
                             <label for="inputUserForm" class="col-md-2 col-3 px-0">Username</label>
                             <div class="col-md-8 col-9">
                                 <input type="text" name="username" class="form-control" id="inputUserForm"
@@ -54,7 +50,6 @@
                             <div class="col-md-8 col-9">
                                 <input type="password" name="password" class="form-control" id="inputPasswordForm"
                                        onkeydown="login(event)" required>
-                                <div class="form-control-feedback">Wrong credentials. Try again?</div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -69,62 +64,56 @@
             <div class="collapse" id="cardRegister">
                 <div class="card">
                     <div class="card-block">
-                        <div class="form-group row mt-4">
-                            <label for="input2UserForm" class="col-md-2 col-3 px-0">Username</label>
-                            <div class="col-md-8 col-9">
-                                <input type="text" class="form-control" id="input2UserForm" onkeydown="register(event)"
-                                       required>
-                                <div class="form-control-feedback">That username already exists. Try another one?</div>
+                        <form action="#" th:action="@{/log/sign_up}" th:object="${user}" method="post">
+                            <div class="form-group row mt-4">
+                                <label for="input2UserForm" class="col-md-2 col-3 px-0">Username</label>
+                                <div class="col-md-8 col-9">
+                                    <input type="text" th:name="username" th:field="*{username}"
+                                           th:value="${user.getUsername()}" class="form-control" id="input2UserForm">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="input2User2Form" class="col-md-2 col-3 px-0">Full Name</label>
-                            <div class="col-md-8 col-9">
-                                <input type="text" class="form-control" id="input2User2Form" onkeydown="register(event)"
-                                       required>
+                            <div class="form-group row">
+                                <label for="input2User2Form" class="col-md-2 col-3 px-0">Full Name</label>
+                                <div class="col-md-8 col-9">
+                                    <input type="text" th:name="fullName" th:field="*{fullName}"
+                                           th:value="${user.getFullName()}" class="form-control" id="input2User2Form">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="input2User3Form" class="col-md-2 col-3 px-0">Address</label>
-                            <div class="col-md-8 col-9">
-                                <input type="text" class="form-control" id="input2User3Form" onkeydown="register(event)"
-                                       required>
+                            <div class="form-group row">
+                                <label for="input2User3Form" class="col-md-2 col-3 px-0">Address</label>
+                                <div class="col-md-8 col-9">
+                                    <input type="text" th:name="address" th:field="*{address}"
+                                           th:value="${user.getAddress()}" class="form-control" id="input2User3Form">
+                                </div>
                             </div>
-                        </div>
                             <div class="form-group row">
                                 <label for="email" class="col-md-2 col-3 px-0">Email</label>
                                 <div class="col-md-8 col-9">
-                                    <input type="text" class="form-control" id="email" onkeydown="register(event)"
-                                           required>
+                                    <input type="text" th:name="email" th:field="*{email}"
+                                           th:value="${user.getEmail()}" class="form-control" id="email">
                                 </div>
                             </div>
-                        <div class="form-group row">
-                            <label for="input2PasswordForm" class="col-md-2 col-3 px-0">Password</label>
-                            <div class="col-md-8 col-9">
-                                <input type="password" class="form-control" id="input2PasswordForm"
-                                       onkeydown="register(event)" required>
+                            <div class="form-group row">
+                                <label for="input2PasswordForm" class="col-md-2 col-3 px-0">Password</label>
+                                <div class="col-md-8 col-9">
+                                    <input type="password" th:name="password" th:field="*{password}"
+                                           th:value="${user.getPassword()}" class="form-control"
+                                           id="input2PasswordForm">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="input2Password2Form" class="col-md-2 col-3 px-0">Verify</label>
-                            <div class="col-md-8 col-9">
-                                <input type="password" class="form-control" id="input2Password2Form"
-                                       onkeydown="register(event)" required>
-                                <div class="form-control-feedback"></div>
+                            <div class="form-group row">
+                                <div class="offset-md-2 offset-3 col-md-8 col-9 pb-3 pt-2">
+                                    <button type="submit" class="btn btn-secondary-outline btn-lg btn-block">
+                                        Register
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-md-2 offset-3 col-md-8 col-9 pb-3 pt-2">
-                                <button class="btn btn-secondary-outline btn-lg btn-block" onclick="register()">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"

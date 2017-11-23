@@ -2,6 +2,7 @@ package com.property.manager.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -24,6 +25,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addRedirectViewController("/", "/log");
 		registry.addRedirectViewController("/login", "/log");
 		registry.addRedirectViewController("/login/", "/log");
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+		if (!registry.hasMappingForPattern("/static/**")) {
+			registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+		}
 	}
 
 	@Override

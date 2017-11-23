@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import com.property.manager.authen.PasswordHash;
 import com.property.manager.models.User;
@@ -15,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,35 +38,35 @@ public class LoginController {
 	}
 
 	@RequestMapping(path = "/log")
-	public String loadLogin() {
+	public String loadLogin(Model model) {
+
+		model.addAttribute("user", new User());
 
 		return "login";
 	}
 
 	@RequestMapping(value = "/log/sign_up")
-	public RegisterResult signUp(
-			@RequestParam(name = "username", required = false) String username,
-			@RequestParam(name = "fullName", required = false) String fullName,
-			@RequestParam(name = "address", required = false) String address,
-			@RequestParam(name = "email", required = false) String email,
-			@RequestParam(name = "password", required = false) String password) {
+	public String signUp(
+			@Valid @ModelAttribute(value = "user") User user,
+			Model model) {
 
 		User newUser = null;
 
-		if (userService.getUserByUsername(username) != null && username
-				.equals(userService.getUserByUsername(username))) {
+		if (userService.getUserByUsername(user.getUsername()) != null && user.getUsername()
+				.equals(userService.getUserByUsername(user.getUsername()).getUsername())) {
 
 			LOGGER.error("Username already exists.");
 
-			return new RegisterResult(false, "Username already exists.");
+			return "login";
 		}
 
 		try {
-			String hash = PasswordHash.get().generateStorngPasswordHash(password);
+			String hash = PasswordHash.get().generateStorngPasswordHash(user.getPassword());
 
 			if (!hash.equals("")) {
 
-				newUser = new User(username, fullName, hash, address, email, "USER", 0, 0);
+				newUser = new User(
+						user.getUsername(), user.getFullName(), hash, user.getAddress(), user.getEmail(), "USER", 0, 0);
 			}
 
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
@@ -75,7 +78,7 @@ public class LoginController {
 
 		LOGGER.info("New user signed up and saved to DB.");
 
-		return new RegisterResult(true);
+		return "login";
 	}
 
 	@RequestMapping(value = "/log/logout", method = RequestMethod.GET)
@@ -92,21 +95,21 @@ public class LoginController {
 
 		return "redirect:/log";
 	}
-
-	class RegisterResult {
-
-		public Boolean success;
-		public String error;
-
-		public RegisterResult(Boolean success) {
-
-			this.success = success;
-		}
-
-		public RegisterResult(Boolean success, String error) {
-
-			this.success = success;
-			this.error = error;
-		}
-	}
+//
+//	class RegisterResult {
+//
+//		public Boolean success;
+//		public String error;
+//
+//		public RegisterResult(Boolean success) {
+//
+//			this.success = success;
+//		}
+//
+//		public RegisterResult(Boolean success, String error) {
+//
+//			this.success = success;
+//			this.error = error;
+//		}
+//	}
 }

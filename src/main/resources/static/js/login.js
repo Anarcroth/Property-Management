@@ -17,42 +17,6 @@ const login = function(event) {
     }
 };
 
-// Executes on pressing the register button.
-// Sends a POST request to the sign-up endpoint.
-// In case the request is successful, prompts the user to register with the credentials.
-const register = function(event) {
-
-    // Same logic as signing in.
-    if (!event || (event && event.keyCode === 13)) {
-
-        const username = document.getElementById('input2UserForm').value;
-        const fullName = document.getElementById('input2User2Form').value;
-        const address = document.getElementById('input2User3Form').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('input2PasswordForm').value;
-        const verificationPassword = document.getElementById('input2Password2Form').value;
-
-        if (password === verificationPassword && verificationPassword.length < 5) {
-            showWarningDiv('input2Password2Form', 'The password should be 5 or more characters. Try again?');
-
-        } else if (password !== verificationPassword) {
-            showWarningDiv('input2Password2Form', 'These passwords don\'t match. Try again?');
-
-        } else {
-            hideWarningDiv('input2Password2Form');
-
-            const data = new FormData();
-            data.append('username', username);
-            data.append('fullName', fullName);
-            data.append('address', address);
-            data.append('email', email);
-            data.append('password', password);
-
-            xhrRequest('POST', '/log/sign_up', data).then(response => handleRegisterResponse(response), error => console.trace(error));
-        }
-    }
-};
-
 // Response should be boolean.
 // On successful login, the user gets redirected to the root page.
 const handleLoginResponse = function(response) {
@@ -61,23 +25,6 @@ const handleLoginResponse = function(response) {
     } else {
         showWarningDiv('inputPasswordForm');
     }
-};
-
-// Response should be boolean.
-const handleRegisterResponse = function(response) {
-    if (response.success) {
-        hideWarningDiv('input2UserForm');
-
-        $('#login-btn').click();
-
-        const sectionDiv = document.getElementById('success-alert');
-        sectionDiv.style.display = 'block';
-    } else if (response.error) {
-        showWarningDiv('input2UserForm', response.error);
-    } else {
-        showWarningDiv('input2UserForm');
-    }
-
 };
 
 const showWarningDiv = function(inputElementId, message) {
@@ -90,15 +37,6 @@ const showWarningDiv = function(inputElementId, message) {
         feedbackDiv.innerHTML = message;
     }
     feedbackDiv.style.display = 'block';
-};
-
-const hideWarningDiv = function(inputElementId) {
-    const inputElement = document.getElementById(inputElementId);
-    const rowDiv = inputElement.parentElement.parentElement;
-    const feedbackDiv = rowDiv.children[1].children[1];
-    rowDiv.classList.remove('has-danger');
-    inputElement.classList.remove('form-control-danger');
-    feedbackDiv.style.display = 'none';
 };
 
 // Makes asynchronous calls to the login API using the supplied arguments.
