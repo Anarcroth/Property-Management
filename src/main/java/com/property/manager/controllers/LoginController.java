@@ -76,6 +76,8 @@ public class LoginController {
 
 		userService.addUser(newUser);
 
+		model.addAttribute("usr", newUser);
+
 		LOGGER.info("New user signed up and saved to DB.");
 
 		return "login";
