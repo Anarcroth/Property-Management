@@ -17,9 +17,17 @@
           media="screen">
     <link rel="stylesheet" href="">
     <style>
-        label{display:inline !important}
-        .btn-filter{ margin: 20px}
-        .row{padding-top:1%}
+        label {
+            display: inline !important
+        }
+
+        .btn-filter {
+            margin: 20px
+        }
+
+        .row {
+            padding-top: 1%
+        }
     </style>
 </head>
 
@@ -52,7 +60,8 @@
                 <input type="checkbox" id="forSale" th:name="forSale"/></div>
 
             <div class="col-md-4"><label for="numberOfBathrooms" class="col-sm-8">Number Of Bathrooms</label>
-                <input type="text" id="numberOfBathrooms" th:name="numberOfBathrooms" class="col-md-3" maxlength="2"/></div>
+                <input type="text" id="numberOfBathrooms" th:name="numberOfBathrooms" class="col-md-3" maxlength="2"/>
+            </div>
 
 
             <div class="col-md-3"><label for="numberOfRooms" class="col-sm-8"> Number Of Rooms</label>
@@ -75,13 +84,14 @@
                 <input type="checkbox" id="forRent" th:name="forRent"/></div>
 
             <div class="col-md-4"><label for="numberOfBedrooms" class="col-sm-8">Number Of Bedrooms</label>
-                <input type="text" id="numberOfBedrooms" th:name="numberOfBedrooms" maxlength="2" class="col-sm-3"/></div>
+                <input type="text" id="numberOfBedrooms" th:name="numberOfBedrooms" maxlength="2" class="col-sm-3"/>
+            </div>
 
             <div class="col-md-3"><label class="col-sm-5" for="address">Country</label>
-                <input  type="text" th:name="address" class="col-sm-6"/></div>
+                <input type="text" th:name="address" class="col-sm-6"/></div>
 
             <div class="col-md-3"><label class="col-sm-6" for="type">Type of Property</label>
-                <select  name="type" id="type">
+                <select name="type" id="type">
                     <option value="null"> Any</option>
                     <option value="house">House</option>
                     <option value="apartment">Apartment</option>
@@ -144,9 +154,6 @@
                                        th:value="${prop.getAddress()}" class="form-control"
                                        id="address" placeholder="Enter address"/>
                             </div>
-
-
-
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <input type="text" th:name="description" th:field="*{description}"
@@ -160,11 +167,10 @@
                                            placeholder="Sale"/><br>
                                 </label><br>
                                 <label for="rent">Rent </label>
-                                    <input type="checkbox" th:name="forRent" th:field="*{forRent}"
-                                           th:value="${prop.isForRent()}" id="rent"
-                                           placeholder="Rent"/>
+                                <input type="checkbox" th:name="forRent" th:field="*{forRent}"
+                                       th:value="${prop.isForRent()}" id="rent"
+                                       placeholder="Rent"/>
                                 </label><br>
-
                                 <hr>
                             </div>
                             <div class="form-group">
@@ -199,7 +205,6 @@
                                        th:value="${prop.getRentPerMonth()}" class="form-control"
                                        id="rentPerMonth" placeholder="Enter rent per month"/>
                             </div>
-
                             <button type="submit" class="btn btn-default">Submit</button>
                         </form>
                     </div>
@@ -216,7 +221,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
         integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"

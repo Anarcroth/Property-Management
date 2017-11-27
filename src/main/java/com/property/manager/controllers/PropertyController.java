@@ -247,15 +247,10 @@ public class PropertyController {
 
 		propertyService.addProperty(property);
 
-		List<Property> list = propertyService.getAllProperties();
-		model.addAttribute("properties", list);
-		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-		model.addAttribute("prop", new Property());
-
-		return "properties";
+		return "redirect:/properties";
 	}
 
-	@RequestMapping(value = "/makeOffer")
+	@RequestMapping(value = "/makeOffer", method = RequestMethod.POST)
 	public String makeOffer(
 			@Valid @ModelAttribute(value = "newOffer") Offer newOffer,
 			@Valid @ModelAttribute(value = "property") Property property,
@@ -272,12 +267,7 @@ public class PropertyController {
 
 		offerService.addOffer(newOffer);
 
-		List<Property> list = propertyService.getAllProperties();
-		model.addAttribute("properties", list);
-		model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
-		model.addAttribute("prop", new Property());
-
-		return "properties";
+		return "redirect:/properties";
 	}
 
 	@RequestMapping(value = "/editProperty", method = RequestMethod.POST)
@@ -289,6 +279,12 @@ public class PropertyController {
 		LOGGER.info("Updating description of property");
 
 		propertyService.updatePropertyDescription(property.getPropertyId(), property.getDescription());
+
+		return "redirect:/properties";
+	}
+
+	@RequestMapping(value = "/properties", method = RequestMethod.GET)
+	public String showProperties(Model model, Authentication authentication) {
 
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);
