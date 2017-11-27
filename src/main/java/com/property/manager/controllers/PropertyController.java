@@ -280,13 +280,15 @@ public class PropertyController {
 		return "properties";
 	}
 
-	@RequestMapping(value = "/editProperty")
+	@RequestMapping(value = "/editProperty", method = RequestMethod.POST)
 	public String editProperty(
 			@Valid @ModelAttribute(value = "property") Property property,
 			Model model,
 			Authentication authentication) {
 
 		LOGGER.info("Updating description of property");
+
+		propertyService.updatePropertyDescription(property.getPropertyId(), property.getDescription());
 
 		List<Property> list = propertyService.getAllProperties();
 		model.addAttribute("properties", list);
