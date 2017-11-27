@@ -80,7 +80,7 @@ public class LoginController {
 
 		LOGGER.info("New user signed up and saved to DB.");
 
-		return "login";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/log/logout", method = RequestMethod.GET)
@@ -97,21 +97,4 @@ public class LoginController {
 
 		return "redirect:/log";
 	}
-//
-//	class RegisterResult {
-//
-//		public Boolean success;
-//		public String error;
-//
-//		public RegisterResult(Boolean success) {
-//
-//			this.success = success;
-//		}
-//
-//		public RegisterResult(Boolean success, String error) {
-//
-//			this.success = success;
-//			this.error = error;
-//		}
-//	}
 }
