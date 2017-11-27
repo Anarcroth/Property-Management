@@ -19,17 +19,21 @@
         .row {
             padding-top: 2%;
         }
+
         .card {
             width: 20rem;
             padding: 1rem;
             margin: 20px;
         }
+
         #btnProfB {
             height: 35px;
         }
+
         #btnProfR {
             height: 35px;
         }
+
         #profileForm {
             display: none;
         }
@@ -52,7 +56,6 @@
                         Settings
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdown-settings">
-                        <!--<a class="dropdown-item" href="./user.html">Profile</a>-->
                         <a class="dropdown-item" href="/log/logout">Log Оut</a>
                     </div>
                 </div>
@@ -65,7 +68,6 @@
         <div class="card col-5">
             <img class="card-img-top" style="width: 100%"
                  src="https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Card image cap">
-            <!--<img class="card-img-top" src="${property.pirctureUrl}" alt="Card image cap">-->
             <div class="card-block">
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
                 <p class="card-text"
@@ -222,7 +224,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
         integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"

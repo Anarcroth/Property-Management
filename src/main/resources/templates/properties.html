@@ -1,4 +1,3 @@
-<!--/*@thymesVar id="properties" type="java.util.List"*/-->
 <!doctype html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -20,11 +19,9 @@
         label {
             display: inline !important
         }
-
         .btn-filter {
             margin: 20px
         }
-
         .row {
             padding-top: 1%
         }
@@ -107,7 +104,6 @@
         <div class="card col-sm-4" style="width: 20rem; padding: 1rem;" th:each="property : ${properties}">
             <img class="card-img-top" style="width: 100%"
                  src="https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Card image cap">
-            <!--<img class="card-img-top" src="${property.pirctureUrl}" alt="Card image cap">-->
             <div class="card-block">
                 <h4 class="card-title" th:text="'Type: ' + ${property.type}"></h4>
                 <p class="card-text"
@@ -119,16 +115,13 @@
     </div>
 
     <div th:object="${user}" th:if="${user.getRole() == 'ADMIN'}">
-        <!-- Button trigger modal -->
         <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalNorm">
             Add new Property
         </button>
-        <!-- Modal -->
         <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <!-- Modal Header -->
                     <div class="modal-header">
                         <button type="button" class="close"
                                 data-dismiss="modal">
@@ -139,7 +132,6 @@
                             Add new Property
                         </h4>
                     </div>
-                    <!-- Modal Body -->
                     <div class="modal-body">
                         <form action="#" th:action="@{/prop}" th:object="${prop}" method="post">
                             <div class="form-group">
@@ -208,8 +200,6 @@
                             <button type="submit" class="btn btn-default">Submit</button>
                         </form>
                     </div>
-
-                    <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default"
                                 data-dismiss="modal">
@@ -233,7 +223,6 @@
         crossorigin="anonymous"></script>
 <script src="/js/global.js"></script>
 <script src="/js/login.js"></script>
-<!--<script src="/js/addprop.js"></script>-->
 <script src="/js/filters.js"></script>
 </body>
 
