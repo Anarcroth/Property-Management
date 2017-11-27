@@ -46,7 +46,7 @@ public class OfferService implements IOfferService {
 
 		} catch (Exception e) {
 
-			LOGGER.error("Could not add property.", e);
+			LOGGER.error("Could not add offer.", e);
 			return new ResponseEntity<String>(
 					"Something went wrong. Please, check your request", HttpStatus.BAD_REQUEST);
 		}

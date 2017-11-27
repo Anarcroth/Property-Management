@@ -173,8 +173,6 @@
                                     <p class="card-text"
                                        th:text="'Offer to buy: ' + ${offer.offerToBuy}"></p>
                                 </div>
-
-
                                 <p class="card-text"
                                    th:text="'Offer to rent: ' + ${offer.offerToRent}"></p>
                                 <button type="button" class="btn btn-default" id="btnProfB"
@@ -183,8 +181,6 @@
                                         See Profiles
                                     </a>
                                 </button>
-
-
                                 <a href="#" class="btn btn-default" data-toggle="modal"
                                    data-target="#confirm-offer-delete">
                                     Delete
@@ -215,7 +211,7 @@
                                 </div>
                             </div>
                             <div class="profile col-6" id="profileWrapper" th:object="${profile}">
-                                <div th:if="${profile != null&&profile.id==offer.userId}">
+                                <div th:if="${profile != null && profile.id == offer.userId}">
                                     <p th:text="${profile.getFullName()}">
                                     <p th:text="${profile.getUsername()}">
                                     <p th:text="${profile.getAddress()}">
